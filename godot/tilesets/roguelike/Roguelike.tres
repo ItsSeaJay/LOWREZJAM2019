@@ -2,8 +2,6 @@
 
 [ext_resource path="res://tilesets/roguelike/roguelikeSheet_transparent.png" type="Texture" id=1]
 
-
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 14, 14, 14, 14, 14, 14, 14, 14 )
 
