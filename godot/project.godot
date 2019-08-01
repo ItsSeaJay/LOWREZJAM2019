@@ -24,6 +24,10 @@ config/name="LOWREZJAM2019"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SceneChanger="*res://autoload/SceneChanger.gd"
+
 [display]
 
 window/size/width=64
