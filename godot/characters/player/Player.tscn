@@ -11,6 +11,7 @@ height = 3.89042
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 script = ExtResource( 1 )
+camera_lerp_weight = 0.025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -20,7 +21,6 @@ texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-smoothing_enabled = true
 drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
