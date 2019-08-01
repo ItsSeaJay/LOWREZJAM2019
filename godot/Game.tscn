@@ -1,10 +1,38 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://maps/tilesets/roguelikeSheet_transparent.png" type="Texture" id=2]
+[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cameras/chase_camera/ChaseCamera.tscn" type="PackedScene" id=4]
+
+[sub_resource type="TileSet" id=1]
+0/name = "roguelikeSheet_transparent.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 960, 544 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 1
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+tile_data = PoolIntArray( 0, 0, 1703937, 1, 0, 1703937, 2, 0, 1703937, 3, 0, 1703937, 65536, 0, 1703937, 65537, 0, 1703937, 65538, 0, 1703937, 65539, 0, 1703937, 131072, 0, 1703937, 131073, 0, 1703937, 131074, 0, 1703937, 131075, 0, 1703937, 196608, 0, 1703937, 196609, 0, 1703937, 196610, 0, 1703937, 196611, 0, 1703937 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32, 32 )
+
+[node name="ChaseCamera" parent="." instance=ExtResource( 4 )]
+target = NodePath("../Player")
