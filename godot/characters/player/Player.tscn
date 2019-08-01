@@ -15,3 +15,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( -32, -32 )
+anchor_mode = 0
+current = true
+smoothing_enabled = true
