@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roguelikeSheet_transparent.png-df07271f333a319f9b83017c21e724d9.stex"
+path="res://.import/roguelikeSheet_transparent.png-faf40c46584c879fd1c4918fe1fdd21c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maps/tilesets/roguelikeSheet_transparent.png"
-dest_files=[ "res://.import/roguelikeSheet_transparent.png-df07271f333a319f9b83017c21e724d9.stex" ]
+source_file="res://maps/tilesets/roguelike/roguelikeSheet_transparent.png"
+dest_files=[ "res://.import/roguelikeSheet_transparent.png-faf40c46584c879fd1c4918fe1fdd21c.stex" ]
 
 [params]
 
