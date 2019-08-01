@@ -4,11 +4,11 @@ class_name Player
 
 export(int) var speed = 16.0
 
+var health = 100
 var velocity : Vector2
 
 func _ready():
-	if PlayerData.position != null:
-		self.position = PlayerData.position
+	if PlayerData.position != null: self.position = PlayerData.position
 
 func _physics_process(delta):
 	var direction = Vector2()
