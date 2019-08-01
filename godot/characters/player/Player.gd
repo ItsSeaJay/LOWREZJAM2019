@@ -7,7 +7,8 @@ export(int) var speed = 16.0
 var velocity : Vector2
 
 func _ready():
-	pass
+	if PlayerData.position != null:
+		self.position = PlayerData.position
 
 func _physics_process(delta):
 	var direction = Vector2()
