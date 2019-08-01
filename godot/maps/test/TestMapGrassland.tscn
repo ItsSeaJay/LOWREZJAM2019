@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://maps/tilesets/roguelike/Roguelike.tres" type="TileSet" id=1]
-[ext_resource path="res://props/doors/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tilesets/roguelike/Roguelike.tres" type="TileSet" id=1]
+
 
 [node name="TestSceneGrassland" type="Node2D"]
 
@@ -13,3 +13,4 @@ tile_data = PoolIntArray( 0, 0, 5, 1, 0, 5, 2, 0, 5, 3, 0, 5, 4, 0, 5, 5, 0, 5, 
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
 position = Vector2( 112, 64 )
+path = "res://maps/test/TestMapDesert.tscn"
