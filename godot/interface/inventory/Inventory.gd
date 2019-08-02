@@ -4,28 +4,22 @@ onready var item_listing = preload("res://interface/inventory/item/ItemListing.t
 onready var item_display = $ScrollContainer/VBoxContainer
 onready var cursor = $Cursor
 
+signal cursor_moved
+signal cursor_selected
+
 var items = [
 	{
-		"name": "Egg Box"
-	},
-	{
-		"name": "Milk"
-	},
-	{
-		"name": "Butter"
-	},
-	{
-		"name": "Sugar"
-	},
-	{
-		"name": "Silver Spoon"
+		"name": "Handgun"
 	}
 ]
 var options = []
 var option_selected = 0
 
 func _ready():
+	self.focus_mode = Control.FOCUS_ALL
+	
 	self.connect("visibility_changed", self, "_on_visibility_changed")
+	self.connect("cursor_moved", self, "_on_cursor_moved")
 	
 	for item in items:
 		var instance = item_listing.instance()
@@ -42,10 +36,13 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.visible = not self.visible
 	
+	# Allow the cursor to be moved to select different items
 	if Input.is_action_just_pressed("ui_down"):
 		option_selected = (option_selected + 1) % options.size()
+		emit_signal("cursor_moved")
 
 func _on_visibility_changed():
 	get_tree().paused = self.visible
-	self.grab_click_focus()
-	self.grab_focus()
+
+func _on_cursor_moved():
+	cursor.position = options[option_selected].get_position()
