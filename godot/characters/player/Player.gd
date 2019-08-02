@@ -15,6 +15,8 @@ onready var camera = $Camera2D
 onready var inventory = $Interface/Inventory
 onready var equipment = inventory.items[0]
 
+const Enemy = preload("res://characters/enemies/Enemy.gd")
+
 var health : int = 100
 var velocity : Vector2
 var speed : float
@@ -91,7 +93,24 @@ func handle_aiming():
 
 func handle_attacking():
 	if Input.is_action_just_pressed("combat_attack"):
-		print("attack")
+		attack()
+
+func attack():
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(
+		self.position, # Origin
+		self.position + (self.look_target * equipment["range"]), # Target destination
+		# Collision exceptions list
+		[
+			self
+		]
+	)
+	
+	# If the attack hit
+	if result.size() > 0:
+		var enemy = result["collider"] as Enemy
+		enemy.damage(33)
+		print(enemy.get_health())
 
 func transition(state):
 	match state:

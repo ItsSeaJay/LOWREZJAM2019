@@ -9,7 +9,8 @@ signal cursor_selected
 
 var items = [
 	{
-		"name": "Handgun"
+		"name": "Handgun",
+		"range": 64.0
 	}
 ]
 var options = []
