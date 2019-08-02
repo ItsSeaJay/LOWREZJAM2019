@@ -10,7 +10,10 @@ signal cursor_selected
 var items = [
 	{
 		"name": "Handgun",
-		"range": 64.0
+		"range": 64.0,
+		"sounds": {
+			"attack": "res://items/equipment/pistol/shoot.wav"
+		}
 	}
 ]
 var options = []

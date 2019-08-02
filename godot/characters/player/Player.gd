@@ -102,7 +102,12 @@ func attack():
 		]
 	)
 	
-	Audio.play_sound("res://items/equipment/pistol/shoot.wav", self.global_transform.origin)
+	
+	Audio.play_sound(
+		equipment["sounds"]["attack"],
+		self.position,
+		rand_range(0.66, 1.0)
+	)
 	
 	# If the attack hit
 	if result.size() > 0:
