@@ -1,4 +1,8 @@
 extends Node
 
-var position = null
-var health = null
+var position
+var health
+
+func _ready():
+	position = null
+	health = null

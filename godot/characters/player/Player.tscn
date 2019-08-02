@@ -10,7 +10,9 @@ height = 3.89042
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 script = ExtResource( 1 )
-terminal_velocity = 16.0
+terminal_velocity = 24.0
+acceleration = 4.0
+friction = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

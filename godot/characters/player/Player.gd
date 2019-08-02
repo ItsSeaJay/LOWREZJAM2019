@@ -6,9 +6,6 @@ export(float) var terminal_velocity = 32.0
 export(float) var acceleration = 1.0
 export(float) var friction = 1.0
 
-onready var camera = $Camera2D
-onready var camera_look_target : Vector2 = self.position
-
 var health : int = 100
 var velocity : Vector2
 var speed : float
