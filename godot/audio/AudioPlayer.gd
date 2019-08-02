@@ -1,13 +1,15 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var audio_node = $AudioStreamPlayer2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	audio_node.connect("finished", self, "free_self")
+	audio_node.stop()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func play_sound(sound, position=null):
+	audio_node.stream = load(sound)
+	audio_node.play()
+
+func free_self():
+	audio_node.stop()
+	queue_free()

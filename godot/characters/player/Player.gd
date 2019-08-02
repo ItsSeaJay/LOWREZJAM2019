@@ -102,6 +102,8 @@ func attack():
 		]
 	)
 	
+	Audio.play_sound("res://items/equipment/pistol/shoot.wav", self.global_transform.origin)
+	
 	# If the attack hit
 	if result.size() > 0:
 		var enemy = result["collider"] as Enemy

@@ -17,5 +17,3 @@ position = Vector2( 184, 56 )
 
 [node name="Scarecrow" parent="Characters" instance=ExtResource( 4 )]
 position = Vector2( 184, 32 )
-
-[node name="Node2D" type="Node2D" parent="."]
