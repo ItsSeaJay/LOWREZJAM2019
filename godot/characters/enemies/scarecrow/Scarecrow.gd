@@ -8,4 +8,4 @@ func _on_damage_taken():
 	print("hurt")
 
 func _on_death():
-	print("death")
+	queue_free()

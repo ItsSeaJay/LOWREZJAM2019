@@ -44,13 +44,16 @@ func _physics_process(delta):
 			handle_camera_movement()
 			
 			if equipment != null:
-				handle_aiming()
+				if Input.is_action_just_pressed("combat_aim"):
+					state = State.Aiming
 		State.Aiming:
 			handle_movement()
 			handle_camera_movement()
 			
+			if Input.is_action_just_released("combat_aim"):
+				state = State.Normal
+			
 			if equipment != null:
-				handle_aiming()
 				handle_attacking()
 
 func handle_movement():
@@ -84,13 +87,6 @@ func handle_look_target():
 func handle_camera_movement():
 	self.camera.offset = self.look_target
 
-func handle_aiming():
-	if self.velocity.normalized() != Vector2.ZERO:
-		if Input.is_action_just_pressed("combat_aim"):
-			transition(State.Aiming)
-		elif Input.is_action_just_released("combat_aim"):
-			transition(State.Normal)
-
 func handle_attacking():
 	if Input.is_action_just_pressed("combat_attack"):
 		attack()
@@ -109,8 +105,7 @@ func attack():
 	# If the attack hit
 	if result.size() > 0:
 		var enemy = result["collider"] as Enemy
-		enemy.damage(33)
-		print(enemy.get_health())
+		enemy.damage(33.34)
 
 func transition(state):
 	match state:
