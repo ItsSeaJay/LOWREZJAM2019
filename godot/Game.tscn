@@ -17,3 +17,9 @@ position = Vector2( 184, 56 )
 
 [node name="Scarecrow" parent="Characters" instance=ExtResource( 4 )]
 position = Vector2( 184, 32 )
+
+[node name="Scarecrow2" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 88, 56 )
+
+[node name="Scarecrow3" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 280, 72 )

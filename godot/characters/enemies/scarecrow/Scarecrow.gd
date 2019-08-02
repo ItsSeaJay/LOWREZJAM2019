@@ -5,7 +5,11 @@ func _ready():
 	self.connect("enemy_killed", self, "_on_death")
 
 func _on_damage_taken():
-	print("hurt")
+	Audio.play_sound(
+		"res://characters/enemies/scarecrow/scarecrow_hurt.wav",
+		self.position,
+		rand_range(0.9, 1.0)
+	)
 
 func _on_death():
 	queue_free()

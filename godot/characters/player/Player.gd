@@ -44,8 +44,9 @@ func _physics_process(delta):
 			handle_camera_movement()
 			
 			if equipment != null:
-				if Input.is_action_just_pressed("combat_aim"):
-					state = State.Aiming
+				if Input.is_action_pressed("combat_aim"):
+					if self.velocity.normalized() != Vector2.ZERO:
+						self.state = State.Aiming
 		State.Aiming:
 			handle_movement()
 			handle_camera_movement()
