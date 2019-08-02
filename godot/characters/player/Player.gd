@@ -2,38 +2,50 @@ extends KinematicBody2D
 
 class_name Player
 
-export(int) var speed = 16.0
-export(float) var camera_look_distance = 16.0
-export(float) var camera_lerp_weight = 0.1
+export(float) var terminal_velocity = 32.0
+export(float) var acceleration = 1.0
+export(float) var friction = 1.0
 
 onready var camera = $Camera2D
 onready var camera_look_target : Vector2 = self.position
 
-var health = 100
+var health : int = 100
 var velocity : Vector2
+var speed : float
+
+enum State {
+	Normal
+}
+var state = State.Normal
 
 func _ready():
 	if PlayerData.position != null: self.position = PlayerData.position
 
 func _physics_process(delta):
-	var direction = Vector2()
+	match(state):
+		State.Normal:
+			handle_movement()
+
+func handle_movement():
+	var direction = Vector2.ZERO
 	
+	# Vertical
 	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
 	elif Input.is_action_pressed("move_down"):
 		direction.y += 1
 	
+	# Horizontal
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
 	elif Input.is_action_pressed("move_right"):
 		direction.x += 1
 	
-	# Change the direction of the camera
-	if not Input.is_action_pressed("combat_aim"):
-		camera_look_target = direction * camera_look_distance
+	# Vary the speed based on how long the player has been moving
+	if direction != Vector2.ZERO:
+		speed = min(terminal_velocity, speed + acceleration)
+	else:
+		speed = max(0.0, speed - friction)
 	
-	camera.offset = Vector2(
-		lerp(camera.offset.x, camera_look_target.x, camera_lerp_weight),
-		lerp(camera.offset.y, camera_look_target.y, camera_lerp_weight)
-	)
+	# Apply the speed in the current direction and move the player character
 	velocity = move_and_slide(direction.normalized() * speed)
