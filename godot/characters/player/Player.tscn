@@ -14,6 +14,7 @@ script = ExtResource( 1 )
 terminal_velocity = 24.0
 acceleration = 4.0
 friction = 2.0
+look_weight = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

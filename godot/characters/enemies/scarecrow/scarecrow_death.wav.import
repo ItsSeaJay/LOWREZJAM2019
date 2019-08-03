@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/scarecrow_death.wav-cbe3f8ebd816ad5a96d27e4eb48eba6e.sample"
+
+[deps]
+
+source_file="res://characters/enemies/scarecrow/scarecrow_death.wav"
+dest_files=[ "res://.import/scarecrow_death.wav-cbe3f8ebd816ad5a96d27e4eb48eba6e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

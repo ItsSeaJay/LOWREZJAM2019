@@ -4,26 +4,21 @@ onready var item_listing = preload("res://interface/inventory/item/ItemListing.t
 onready var item_display = $ScrollContainer/VBoxContainer
 onready var cursor = $Cursor
 
-signal cursor_moved
-signal cursor_selected
+onready var equipment_table = load_equipment_table()
 
-var items = [
-	{
-		"name": "Handgun",
-		"range": 64.0,
-		"sounds": {
-			"attack": "res://items/equipment/pistol/shoot.wav"
-		}
-	}
-]
+var items = []
 var options = []
 var option_selected = 0
 
+signal cursor_moved
+signal cursor_selected
+
 func _ready():
-	self.focus_mode = Control.FOCUS_ALL
-	
 	self.connect("visibility_changed", self, "_on_visibility_changed")
 	self.connect("cursor_moved", self, "_on_cursor_moved")
+	
+	items.append(equipment_table["machine_pistol"])
+	print(items[0]["name"])
 	
 	for item in items:
 		var instance = item_listing.instance()
@@ -33,7 +28,6 @@ func _ready():
 		self.item_display.add_child(instance)
 	
 	options = item_display.get_children()
-	print(options)
 
 func _process(delta):
 	# Allow the inventory screen to be opened and closed
@@ -50,3 +44,16 @@ func _on_visibility_changed():
 
 func _on_cursor_moved():
 	cursor.position = options[option_selected].get_position()
+
+func load_equipment_table():
+	var table = {}
+	
+	var file = File.new()
+	file.open("res://data/equipment.json", file.READ)
+	
+	var contents = file.get_as_text()
+	var json = JSON.parse(contents)
+	
+	file.close()
+	
+	return json.result

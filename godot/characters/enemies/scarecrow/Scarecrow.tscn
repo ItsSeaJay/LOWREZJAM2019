@@ -4,7 +4,7 @@
 [ext_resource path="res://characters/enemies/scarecrow/scarecrow.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.44067
+radius = 4.99903
 height = 5.67916
 
 [node name="Scarecrow" type="KinematicBody2D"]

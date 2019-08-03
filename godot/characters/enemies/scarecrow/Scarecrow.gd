@@ -12,4 +12,9 @@ func _on_damage_taken():
 	)
 
 func _on_death():
+	Audio.play_sound(
+		"res://characters/enemies/scarecrow/scarecrow_death.wav",
+		self.position,
+		rand_range(0.9, 1.0)
+	)
 	queue_free()
