@@ -4,8 +4,6 @@ onready var item_listing = preload("res://interface/inventory/item/ItemListing.t
 onready var item_display = $ScrollContainer/VBoxContainer
 onready var cursor = $Cursor
 
-onready var equipment_table = load_equipment_table()
-
 var items = []
 var options = []
 var option_selected = 0
@@ -16,9 +14,6 @@ signal cursor_selected
 func _ready():
 	self.connect("visibility_changed", self, "_on_visibility_changed")
 	self.connect("cursor_moved", self, "_on_cursor_moved")
-	
-	items.append(equipment_table["machine_pistol"])
-	print(items[0]["name"])
 	
 	for item in items:
 		var instance = item_listing.instance()
@@ -33,11 +28,6 @@ func _process(delta):
 	# Allow the inventory screen to be opened and closed
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.visible = not self.visible
-	
-	# Allow the cursor to be moved to select different items
-	if Input.is_action_just_pressed("ui_down"):
-		option_selected = (option_selected + 1) % options.size()
-		emit_signal("cursor_moved")
 
 func _on_visibility_changed():
 	get_tree().paused = self.visible

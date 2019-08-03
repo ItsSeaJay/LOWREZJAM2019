@@ -13,7 +13,7 @@ var look_target : Vector2
 onready var camera = $Camera2D
 
 onready var inventory = $Interface/Inventory
-onready var equipment = inventory.items[0]
+onready var equipment = null
 
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
@@ -37,9 +37,6 @@ func _ready():
 		self.health = PlayerData.health
 
 func _physics_process(delta):
-	# Cool down the gun regardless of which state we're in
-	equipment["heat"] = max(equipment["heat"] - delta, 0.0)
-	
 	match(self.state):
 		State.Normal:
 			handle_movement()
