@@ -4,8 +4,6 @@ onready var item_listing = preload("res://interface/inventory/item/ItemListing.t
 onready var item_display = $ScrollContainer/VBoxContainer
 
 var items = []
-var options = []
-var option_selected = 0
 
 signal item_inserted
 
