@@ -2,7 +2,6 @@ extends Control
 
 onready var item_listing = preload("res://interface/inventory/item/ItemListing.tscn")
 onready var item_display = $ScrollContainer/VBoxContainer
-onready var cursor = $Cursor
 
 var items = []
 var options = []
@@ -10,13 +9,9 @@ var option_selected = 0
 
 signal item_inserted
 
-signal cursor_moved
-signal cursor_selected
-
 func _ready():
 	self.connect("visibility_changed", self, "_on_visibility_changed")
 	self.connect("item_inserted", self, "_on_item_inserted")
-	self.connect("cursor_moved", self, "_on_cursor_moved")
 	
 	for item in items:
 		var instance = item_listing.instance()
@@ -42,9 +37,6 @@ func _on_item_inserted():
 		instance.get_node("Name").text = item["name"]
 		
 		self.item_display.add_child(instance)
-
-func _on_cursor_moved():
-	cursor.position = options[option_selected].get_position()
 
 func insert_item(metadata, quantity=1):
 	for item in range(quantity):
