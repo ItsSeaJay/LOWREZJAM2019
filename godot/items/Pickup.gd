@@ -21,7 +21,7 @@ func _ready():
 
 func _process(delta):	
 	if self.within_reach and Input.is_action_just_pressed("move_interact"):
-		self.pick_up(PlayerData.items)
+		self.pick_up(PlayerData.instance.inventory)
 
 func _on_Area2D_body_entered(body):
 	if body is Player:
@@ -35,9 +35,7 @@ func _on_pick_up():
 	self.queue_free()
 
 func pick_up(inventory):
-	for item in range(quantity):
-		inventory.append(self.metadata)
-	
+	inventory.insert_item(self.metadata, quantity)
 	emit_signal("picked_up")
 
 func load_metadata():

@@ -1,10 +1,6 @@
 extends Node
 
-var position
-var health
-var items
-
-func _ready():
-	position = null
-	health = null
-	items = []
+onready var health = null
+onready var position = null
+onready var items = []
+onready var instance = null

@@ -30,6 +30,8 @@ var state = State.Normal
 signal health_changed
 
 func _ready():
+	PlayerData.instance = self
+	
 	if PlayerData.position != null:
 		self.position = PlayerData.position
 	
