@@ -4,7 +4,7 @@
 [ext_resource path="res://tilesets/roguelike/Roguelike.tres" type="TileSet" id=2]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/enemies/scarecrow/Scarecrow.tscn" type="PackedScene" id=4]
-[ext_resource path="res://items/equipment/pistol/HandgunPickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://items/equipment/handgun/HandgunPickup.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -30,3 +30,4 @@ position = Vector2( 112, 96 )
 position = Vector2( 232, 96 )
 
 [node name="HandgunPickup" parent="." instance=ExtResource( 5 )]
+position = Vector2( 184, 80 )
