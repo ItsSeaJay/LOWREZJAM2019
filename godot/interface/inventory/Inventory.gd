@@ -24,8 +24,6 @@ func _ready():
 		label_name.text = item["name"]
 		
 		self.item_display.add_child(instance)
-	
-	options = item_display.get_children()
 
 func _process(delta):
 	# Allow the inventory screen to be opened and closed

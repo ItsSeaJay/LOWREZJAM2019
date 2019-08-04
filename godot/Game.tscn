@@ -31,3 +31,5 @@ position = Vector2( 232, 96 )
 
 [node name="HandgunPickup" parent="." instance=ExtResource( 5 )]
 position = Vector2( 184, 80 )
+
+[node name="Dialogue" type="CanvasLayer" parent="."]
