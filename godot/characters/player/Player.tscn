@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/player.png" type="Texture" id=2]
 [ext_resource path="res://interface/inventory/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/ikkle-4.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.69782
 height = 3.89042
+
+[sub_resource type="DynamicFont" id=2]
+size = 4
+font_data = ExtResource( 4 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
@@ -37,5 +42,41 @@ visible = false
 [node name="Dialogue" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="Dialogue"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialogue/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogue/Control/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Dialogue/Control/HBoxContainer/VBoxContainer"]
+margin_top = 38.0
+margin_right = 64.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogue/Control/HBoxContainer/VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 57.0
+margin_bottom = 19.0
+
+[node name="Label" type="Label" parent="Dialogue/Control/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 50.0
+margin_bottom = 4.0
+custom_fonts/font = SubResource( 2 )
+text = "Hello, World!"
+
+[node name="Label2" type="Label" parent="Dialogue/Control/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 2 )
+text = "Oh what a day."
