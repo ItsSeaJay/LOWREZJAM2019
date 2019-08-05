@@ -34,7 +34,7 @@ config/icon="res://icon.png"
 
 SceneChanger="*res://autoload/SceneChanger.gd"
 PlayerData="*res://autoload/PlayerData.gd"
-Audio="*res://autoload/Audio.gd"
+AudioSystem="*res://autoload/AudioSystem.gd"
 
 [display]
 

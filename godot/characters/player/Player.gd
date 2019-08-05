@@ -114,7 +114,7 @@ func attack():
 	)
 	
 	# Give audio feedback that the player has attacked
-	Audio.play_sound(
+	AudioSystem.play_sound(
 		equipment["sounds"]["attack"],
 		self.position + self.camera.offset,
 		rand_range(0.66, 1.0)

@@ -33,3 +33,9 @@ drag_margin_bottom = 0.0
 
 [node name="Inventory" parent="Interface" instance=ExtResource( 3 )]
 visible = false
+
+[node name="Dialogue" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Dialogue"]
+margin_right = 40.0
+margin_bottom = 40.0
