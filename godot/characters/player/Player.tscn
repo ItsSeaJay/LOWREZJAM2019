@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/player.png" type="Texture" id=2]
 [ext_resource path="res://interface/inventory/Inventory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://interface/dialogue/DialogueBox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.69782
@@ -36,5 +35,3 @@ drag_margin_bottom = 0.0
 visible = false
 
 [node name="Dialogue" type="CanvasLayer" parent="."]
-
-[node name="DialogueBox" parent="Dialogue" instance=ExtResource( 4 )]
