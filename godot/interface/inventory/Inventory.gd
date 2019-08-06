@@ -3,6 +3,8 @@ extends Control
 onready var item_listing = preload("res://interface/inventory/item/ItemListing.tscn")
 onready var item_display = $ScrollContainer/VBoxContainer
 
+onready var animation_player = $AnimationPlayer
+
 var items = []
 
 signal item_inserted
@@ -20,7 +22,7 @@ func _ready():
 
 func _process(delta):
 	# Allow the inventory screen to be opened and closed
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and not animation_player.is_playing():
 		self.visible = not self.visible
 
 func _on_visibility_changed():
