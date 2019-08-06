@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://interface/inventory/inventory_screen_mockup.png" type="Texture" id=2]
@@ -14,11 +14,12 @@
 [ext_resource path="res://interface/inventory/health_display/health_display_009.png" type="Texture" id=12]
 [ext_resource path="res://interface/inventory/health_display/health_display_010.png" type="Texture" id=13]
 [ext_resource path="res://interface/inventory/health_display/health_display_011.png" type="Texture" id=14]
-[ext_resource path="res://items/equipment/handgun/handgun_icon.png" type="Texture" id=15]
+[ext_resource path="res://items/equipment/none/none_icon.png" type="Texture" id=15]
 [ext_resource path="res://fonts/m3x6.tres" type="DynamicFont" id=16]
-[ext_resource path="res://fonts/ikkle.tres" type="DynamicFont" id=17]
-[ext_resource path="res://interface/inventory/item/item_background.png" type="Texture" id=18]
-[ext_resource path="res://interface/inventory/item/ItemListing.tscn" type="PackedScene" id=19]
+[ext_resource path="res://interface/inventory/command_window.png" type="Texture" id=17]
+[ext_resource path="res://fonts/ikkle.tres" type="DynamicFont" id=18]
+[ext_resource path="res://interface/inventory/item/item_background.png" type="Texture" id=19]
+[ext_resource path="res://interface/inventory/item/ItemListing.tscn" type="PackedScene" id=20]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -38,10 +39,16 @@ tracks/0/keys = {
 "values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 32, 23 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 18 )
+texture = ExtResource( 19 )
 region_rect = Rect2( 0, 0, 56, 20 )
 margin_left = 2.0
 margin_right = 2.0
@@ -92,14 +99,15 @@ custom_styles/panel = SubResource( 1 )
 margin_right = 56.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
+custom_constants/separation = 4
 
 [node name="PrimaryContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
 margin_right = 56.0
-margin_bottom = 33.0
+margin_bottom = 38.0
 
 [node name="LeftContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer"]
 margin_right = 20.0
-margin_bottom = 33.0
+margin_bottom = 38.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer"]
 margin_right = 20.0
@@ -117,55 +125,56 @@ anims/Full = SubResource( 4 )
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer"]
 margin_top = 24.0
 margin_right = 20.0
-margin_bottom = 33.0
+margin_bottom = 38.0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer/CenterContainer2"]
-margin_left = 3.0
-margin_right = 17.0
-margin_bottom = 9.0
+margin_left = 4.0
+margin_right = 16.0
+margin_bottom = 14.0
 texture = ExtResource( 15 )
 
 [node name="RightContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer"]
 margin_left = 24.0
 margin_right = 56.0
-margin_bottom = 33.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer"]
 margin_right = 32.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 16 )
-text = "Status"
+text = "Command"
 align = 1
 
-[node name="ActionBox" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer"]
-visible = false
-margin_top = 11.0
+[node name="CommandBox" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer"]
+margin_top = 12.0
 margin_right = 32.0
-margin_bottom = 33.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 5 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/ActionBox"]
-margin_right = 32.0
-margin_bottom = 22.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/CommandBox"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 30.0
+margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/ActionBox/VBoxContainer"]
-margin_right = 32.0
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/CommandBox/VBoxContainer"]
+margin_right = 28.0
 margin_bottom = 3.0
-custom_fonts/font = ExtResource( 17 )
+custom_fonts/font = ExtResource( 18 )
 text = "Use"
 
-[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/ActionBox/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/CommandBox/VBoxContainer"]
 margin_top = 7.0
-margin_right = 32.0
+margin_right = 28.0
 margin_bottom = 10.0
-custom_fonts/font = ExtResource( 17 )
+custom_fonts/font = ExtResource( 18 )
 text = "Discard"
 
 [node name="SecondaryContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 37.0
+margin_top = 42.0
 margin_right = 56.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
@@ -173,7 +182,7 @@ size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer"]
 margin_right = 56.0
-margin_bottom = 19.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
@@ -181,41 +190,47 @@ custom_styles/panel = SubResource( 3 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 54.0
-margin_bottom = 17.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer"]
 margin_right = 52.0
-margin_bottom = 19.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
-custom_constants/separation = 1
+custom_constants/separation = 0
 
-[node name="ItemListing" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 19 )]
+[node name="ItemListing" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
 anchor_right = 0.0
 margin_right = 52.0
-margin_bottom = 3.0
+margin_bottom = 5.0
 
-[node name="ItemListing3" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 19 )]
+[node name="ItemListing3" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
 anchor_right = 0.0
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 52.0
-margin_bottom = 7.0
+margin_bottom = 10.0
 
-[node name="ItemListing5" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 19 )]
+[node name="ItemListing5" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
 anchor_right = 0.0
-margin_top = 8.0
-margin_right = 52.0
-margin_bottom = 11.0
-
-[node name="ItemListing6" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 19 )]
-anchor_right = 0.0
-margin_top = 12.0
+margin_top = 10.0
 margin_right = 52.0
 margin_bottom = 15.0
 
-[node name="ItemListing7" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 19 )]
+[node name="ItemListing6" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
 anchor_right = 0.0
-margin_top = 16.0
+margin_top = 15.0
 margin_right = 52.0
-margin_bottom = 19.0
+margin_bottom = 20.0
+
+[node name="ItemListing7" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
+anchor_right = 0.0
+margin_top = 20.0
+margin_right = 52.0
+margin_bottom = 25.0
+
+[node name="ItemListing8" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 20 )]
+anchor_right = 0.0
+margin_top = 25.0
+margin_right = 52.0
+margin_bottom = 30.0
