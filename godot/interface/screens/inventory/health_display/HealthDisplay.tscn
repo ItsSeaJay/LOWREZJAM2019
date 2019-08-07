@@ -1,0 +1,54 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://shaders/colour_mix/colour_mix.shader" type="Shader" id=1]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background2.png" type="Texture" id=2]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_portrait.png" type="Texture" id=3]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background1.png" type="Texture" id=4]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background3.png" type="Texture" id=5]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background4.png" type="Texture" id=6]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background5.png" type="Texture" id=7]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background6.png" type="Texture" id=8]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background7.png" type="Texture" id=9]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background8.png" type="Texture" id=10]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background9.png" type="Texture" id=11]
+[ext_resource path="res://interface/screens/inventory/health_display/health_display_background10.png" type="Texture" id=12]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/input_color = Color( 0.0980392, 0.870588, 0.054902, 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "pulse"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 4 ) ]
+}
+
+[node name="HealthDisplay" type="CenterContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+
+[node name="Portrait" type="TextureRect" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "pulse"
+anims/pulse = SubResource( 2 )

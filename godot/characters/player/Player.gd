@@ -11,6 +11,8 @@ export(float) var look_distance = 8.0
 export(float) var look_weight = 0.4
 var look_target : Vector2
 
+export(int) var health_max = 100
+
 onready var camera = $Camera2D
 
 onready var inventory = $Interface/Inventory
@@ -18,7 +20,9 @@ onready var equipment = inventory.get_equipment()
 
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
-var health : int = 100
+onready var vulnerable : bool = true
+var health : int = self.health_max
+var direction : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
@@ -30,6 +34,7 @@ enum State {
 var state = State.Normal
 
 signal health_changed
+signal died
 
 func _ready():
 	PlayerData.instance = self
@@ -39,6 +44,8 @@ func _ready():
 	
 	if PlayerData.health != null:
 		self.health = PlayerData.health
+	
+	self.connect("died", self, "_on_death")
 
 func _physics_process(delta):
 	match(self.state):
@@ -62,22 +69,22 @@ func _physics_process(delta):
 				handle_attacking()
 
 func handle_movement():
-	var direction = Vector2.ZERO
+	self.direction = Vector2.ZERO
 	
 	# Vertical
 	if Input.is_action_pressed("move_up"):
-		direction.y -= 1
+		self.direction.y -= 1
 	elif Input.is_action_pressed("move_down"):
-		direction.y += 1
+		self.direction.y += 1
 	
 	# Horizontal
 	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
+		self.direction.x -= 1
 	elif Input.is_action_pressed("move_right"):
-		direction.x += 1
+		self.direction.x += 1
 	
 	# Vary the speed based on how long the player has been moving
-	if direction != Vector2.ZERO:
+	if self.direction != Vector2.ZERO:
 		speed = min(terminal_velocity, speed + walk_acceleration)
 	else:
 		speed = max(0.0, speed - walk_friction)
@@ -85,8 +92,11 @@ func handle_movement():
 	# Apply the speed in the current direction and move the player character
 	velocity = move_and_slide(direction.normalized() * speed)
 
+func _on_death():
+	SceneChanger.change_scene("res://interface/screens/game_over/GameOver.tscn")
+
 func handle_look_target():
-	self.look_target = self.velocity.normalized() * self.look_distance
+	self.look_target = self.direction * self.look_distance
 
 func handle_camera_movement():
 	self.camera.offset.x = lerp(self.camera.offset.x, self.look_target.x, self.look_weight)
@@ -127,6 +137,19 @@ func attack():
 		var enemy = result["collider"] as Enemy
 		var damage = rand_range(equipment["damage"]["min"], equipment["damage"]["max"])
 		enemy.damage(damage)
+
+func heal(amount):
+	self.health = min(health + amount, health_max)
+	self.emit_signal("health_changed")
+
+func damage(amount):
+	if vulnerable:
+		self.health = max(health - amount, 0)
+	
+		if health > 0:
+			self.emit_signal("health_changed")
+		else:
+			self.emit_signal("died")
 
 func transition(state):
 	match state:
