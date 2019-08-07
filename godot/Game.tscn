@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.png" type="Texture" id=2]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/enemies/scarecrow/Scarecrow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://items/equipment/handgun/HandgunPickup.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "exterior_snow.png 0"
@@ -46,3 +47,8 @@ position = Vector2( 112, 96 )
 
 [node name="Scarecrow3" parent="Characters" instance=ExtResource( 4 )]
 position = Vector2( 232, 96 )
+
+[node name="HandgunPickup" parent="." instance=ExtResource( 5 )]
+position = Vector2( 185.005, 81.8726 )
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]

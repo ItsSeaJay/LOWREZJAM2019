@@ -1,0 +1,21 @@
+{
+	"name": "Handgun",
+	"description": [
+		"A semi-automatic pistol.",
+		"Easy to handle, but not very powerful."
+	],
+	"range": 64.0,
+	"spread": 1.0,
+	"damage": {
+		"min": 25,
+		"max": 33
+	},
+	"clip": 8,
+	"transmission": "semi_automatic",
+	"cooldown": 0.5,
+	"heat": 0.0,
+	"icon": "res://items/equipment/pistol/handgun_icon.png",
+	"sounds": {
+		"attack": "res://items/equipment/pistol/shoot.wav"
+	}
+}

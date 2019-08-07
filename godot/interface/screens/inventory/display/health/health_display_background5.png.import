@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dialogue_prompt.png-93ffff7d1ea3ea5481bb905509ffd092.stex"
+path="res://.import/health_display_background5.png-8e445d3b4b74ad2fb1a0d47833a99f3b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://interface/dialogue/dialogue_prompt.png"
-dest_files=[ "res://.import/dialogue_prompt.png-93ffff7d1ea3ea5481bb905509ffd092.stex" ]
+source_file="res://interface/screens/inventory/display/health/health_display_background5.png"
+dest_files=[ "res://.import/health_display_background5.png-8e445d3b4b74ad2fb1a0d47833a99f3b.stex" ]
 
 [params]
 

@@ -4,7 +4,6 @@
 [ext_resource path="res://characters/player/player.png" type="Texture" id=2]
 [ext_resource path="res://interface/screens/inventory/Inventory.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.69782
 height = 3.89042
@@ -31,5 +30,3 @@ drag_margin_bottom = 0.0
 
 [node name="Inventory" parent="Interface" instance=ExtResource( 3 )]
 visible = false
-
-[node name="Dialogue" type="CanvasLayer" parent="."]

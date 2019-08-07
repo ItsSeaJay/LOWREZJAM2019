@@ -3,15 +3,14 @@
 [ext_resource path="res://interface/screens/inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://interface/screens/inventory/inventory_screen_mockup.png" type="Texture" id=2]
 [ext_resource path="res://interface/screens/inventory/inventory_green_theme.tres" type="Theme" id=3]
-[ext_resource path="res://interface/screens/inventory/health_display/HealthDisplay.tscn" type="PackedScene" id=4]
-[ext_resource path="res://interface/screens/inventory/equipment_display/EquipmentDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://interface/screens/inventory/display/health/HealthDisplay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/screens/inventory/display/equipment/EquipmentDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/screens/inventory/command_window.png" type="Texture" id=6]
 [ext_resource path="res://interface/screens/inventory/item/item_background.png" type="Texture" id=7]
 
-
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 32, 23 )
 margin_left = 2.0
@@ -19,7 +18,7 @@ margin_right = 2.0
 margin_top = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 56, 20 )
 margin_left = 2.0
@@ -27,7 +26,7 @@ margin_right = 2.0
 margin_top = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "close"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -78,7 +77,7 @@ tracks/3/keys = {
 "values": [ true, true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "open"
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
@@ -201,7 +200,7 @@ margin_right = 32.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/RightContainer/CommandBox"]
 margin_left = 2.0
@@ -210,7 +209,6 @@ margin_right = 30.0
 margin_bottom = 36.0
 
 [node name="SecondaryContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 42.0
 margin_right = 56.0
 margin_bottom = 58.0
@@ -221,7 +219,7 @@ size_flags_vertical = 3
 margin_right = 56.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer/SecondaryContainer/PanelContainer"]
 margin_left = 2.0
@@ -237,8 +235,8 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/close = SubResource( 5 )
-anims/open = SubResource( 6 )
+anims/close = SubResource( 4 )
+anims/open = SubResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

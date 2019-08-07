@@ -47,6 +47,13 @@ func _ready():
 	
 	self.connect("died", self, "_on_death")
 
+func _process(delta):
+	# Allow the inventory screen to be opened by the player when the game isn't paused elsewhere
+	if Input.is_action_just_pressed("ui_cancel") and not inventory.animation_player.is_playing():
+		get_tree().paused = true
+		
+		inventory.animation_player.play("open")
+
 func _physics_process(delta):
 	match(self.state):
 		State.Normal:
