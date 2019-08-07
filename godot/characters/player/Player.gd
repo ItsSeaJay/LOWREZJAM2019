@@ -2,9 +2,10 @@ extends KinematicBody2D
 
 class_name Player
 
-export(float) var terminal_velocity = 32.0
-export(float) var acceleration = 1.0
-export(float) var friction = 1.0
+export(float) var walk_speed_normal = 32.0
+export(float) var walk_speed_aiming = 24.0
+export(float) var walk_acceleration = 1.0
+export(float) var walk_friction = 1.0
 
 export(float) var look_distance = 8.0
 export(float) var look_weight = 0.4
@@ -13,13 +14,14 @@ var look_target : Vector2
 onready var camera = $Camera2D
 
 onready var inventory = $Interface/Inventory
-onready var equipment = null
+onready var equipment = inventory.get_equipment()
 
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
 var health : int = 100
 var velocity : Vector2
 var speed : float
+var terminal_velocity : float = self.walk_speed_normal
 
 enum State {
 	Normal,
@@ -76,9 +78,9 @@ func handle_movement():
 	
 	# Vary the speed based on how long the player has been moving
 	if direction != Vector2.ZERO:
-		speed = min(terminal_velocity, speed + acceleration)
+		speed = min(terminal_velocity, speed + walk_acceleration)
 	else:
-		speed = max(0.0, speed - friction)
+		speed = max(0.0, speed - walk_friction)
 	
 	# Apply the speed in the current direction and move the player character
 	velocity = move_and_slide(direction.normalized() * speed)
@@ -131,6 +133,6 @@ func transition(state):
 		State.Normal:
 			pass
 		State.Aiming:
-			pass
+			self.terminal_velocity = self.walk_speed_normal
 	
 	self.state = state

@@ -13,7 +13,7 @@ content_margin_left = 0.0
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=6]
 corner_detail = 1
 anti_aliasing = false
 
@@ -30,6 +30,6 @@ Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 3 )
 VScrollBar/styles/grabber = SubResource( 4 )
 VScrollBar/styles/grabber_highlight = SubResource( 5 )
-VScrollBar/styles/scroll = SubResource( 9 )
+VScrollBar/styles/scroll = SubResource( 6 )
 VScrollBar/styles/scroll_focus = SubResource( 7 )
 VSlider/styles/slider = SubResource( 8 )

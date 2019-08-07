@@ -1,17 +1,21 @@
 extends Control
 
 onready var item_listing = preload("res://interface/inventory/item/ItemListing.tscn")
+
 onready var item_display = $ScrollContainer/VBoxContainer
+onready var health_display = $MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer/HealthDisplay
 
 onready var animation_player = $AnimationPlayer
+
+onready var player = $"/root/Game/Characters/Player"
 
 var items = []
 
 signal item_inserted
 
 func _ready():
-	self.connect("visibility_changed", self, "_on_visibility_changed")
 	self.connect("item_inserted", self, "_on_item_inserted")
+	player.connect("health_changed", self, "_on_Player_health_changed")
 	
 	for item in items:
 		var instance = item_listing.instance()
@@ -23,10 +27,15 @@ func _ready():
 func _process(delta):
 	# Allow the inventory screen to be opened and closed
 	if Input.is_action_just_pressed("ui_cancel") and not animation_player.is_playing():
-		self.visible = not self.visible
+		get_tree().paused = not get_tree().paused
+		
+		if not self.visible:
+			animation_player.play("open")
+		else:
+			animation_player.play("close")
 
-func _on_visibility_changed():
-	get_tree().paused = self.visible
+func _on_player_health_changed():
+	pass
 
 func _on_item_inserted():
 	for listing in self.item_display.get_children():
@@ -38,21 +47,11 @@ func _on_item_inserted():
 		
 		self.item_display.add_child(instance)
 
+func get_equipment():
+	return
+
 func insert_item(metadata, quantity=1):
 	for item in range(quantity):
 		self.items.append(metadata)
 	
 	emit_signal("item_inserted")
-
-func load_equipment_table():
-	var table = {}
-	
-	var file = File.new()
-	file.open("res://data/equipment.json", file.READ)
-	
-	var contents = file.get_as_text()
-	var json = JSON.parse(contents)
-	
-	file.close()
-	
-	return json.result

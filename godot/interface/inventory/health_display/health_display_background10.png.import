@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/health_display_003.png-28665bda005472b8bbfc5aceb46fab9c.stex"
+path="res://.import/health_display_background10.png-e84e1c5c6812c8928e9059fba31c07a2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://interface/inventory/health_display/health_display_003.png"
-dest_files=[ "res://.import/health_display_003.png-28665bda005472b8bbfc5aceb46fab9c.stex" ]
+source_file="res://interface/inventory/health_display/health_display_background10.png"
+dest_files=[ "res://.import/health_display_background10.png-e84e1c5c6812c8928e9059fba31c07a2.stex" ]
 
 [params]
 
