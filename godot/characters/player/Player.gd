@@ -3,7 +3,7 @@ extends KinematicBody2D
 class_name Player
 
 export(float) var walk_speed_normal = 32.0
-export(float) var walk_speed_aiming = 24.0
+export(float) var walk_speed_aiming = 16.0
 export(float) var walk_acceleration = 1.0
 export(float) var walk_friction = 1.0
 
@@ -16,7 +16,8 @@ export(int) var health_max = 100
 onready var camera = $Camera2D
 
 onready var inventory = $Interface/Inventory
-onready var equipment = inventory.get_equipment()
+onready var equipment_display = $Interface/Inventory/MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer/EquipmentDisplay
+onready var no_equipment_icon = "res://items/equipment/none/none_icon.png"
 
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
@@ -26,6 +27,7 @@ var direction : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
+var equipment
 
 enum State {
 	Normal,
@@ -64,13 +66,15 @@ func _physics_process(delta):
 			if equipment != null:
 				if Input.is_action_pressed("combat_aim"):
 					if self.velocity.normalized() != Vector2.ZERO:
-						self.state = State.Aiming
+						transition(State.Aiming)
 		State.Aiming:
 			handle_movement()
 			handle_camera_movement()
 			
+			self.equipment["heat"] = max(self.equipment["heat"] - delta, 0.0)
+			
 			if Input.is_action_just_released("combat_aim"):
-				state = State.Normal
+				transition(State.Normal)
 			
 			if equipment != null:
 				handle_attacking()
@@ -92,12 +96,12 @@ func handle_movement():
 	
 	# Vary the speed based on how long the player has been moving
 	if self.direction != Vector2.ZERO:
-		speed = min(terminal_velocity, speed + walk_acceleration)
+		self.speed = min(self.terminal_velocity, self.speed + self.walk_acceleration)
 	else:
-		speed = max(0.0, speed - walk_friction)
+		self.speed = max(0.0, self.speed - self.walk_friction)
 	
 	# Apply the speed in the current direction and move the player character
-	velocity = move_and_slide(direction.normalized() * speed)
+	self.velocity = move_and_slide(self.direction.normalized() * self.speed)
 
 func _on_death():
 	SceneChanger.change_scene("res://interface/screens/game_over/GameOver.tscn")
@@ -145,6 +149,11 @@ func attack():
 		var damage = rand_range(equipment["damage"]["min"], equipment["damage"]["max"])
 		enemy.damage(damage)
 
+func equip(item):
+	if item != null:
+		self.equipment = item
+		self.equipment_display.get_node("TextureRect").set_texture(load(item["icon"]))
+
 func heal(amount):
 	self.health = min(health + amount, health_max)
 	self.emit_signal("health_changed")
@@ -161,8 +170,8 @@ func damage(amount):
 func transition(state):
 	match state:
 		State.Normal:
-			pass
-		State.Aiming:
 			self.terminal_velocity = self.walk_speed_normal
+		State.Aiming:
+			self.terminal_velocity = self.walk_speed_aiming
 	
 	self.state = state

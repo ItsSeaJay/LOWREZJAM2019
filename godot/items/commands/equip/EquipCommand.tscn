@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://items/commands/equip/EquipCommand.gd" type="Script" id=1]
+
+[node name="EquipCommand" type="Button"]
+margin_right = 28.0
+margin_bottom = 3.0
+text = "Equip"
+script = ExtResource( 1 )

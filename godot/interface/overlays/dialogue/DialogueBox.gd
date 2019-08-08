@@ -2,12 +2,13 @@ extends Control
 
 onready var label = $HBoxContainer/VBoxContainer/PanelContainer/TextContainer/Label
 onready var animation_player = $AnimationPlayer
+onready var dialogue_prompt = $HBoxContainer/VBoxContainer/PanelContainer/CursorContainer/VBoxContainer/TextureRect
 
 var metadata
 var text_raw
 var text_formatted
 var text_display_index = 0
-var text_scroll_speed = 4.0
+var text_scroll_speed = 8.0
 var cursor_position = 0.0
 
 func _ready():
@@ -21,9 +22,17 @@ func _process(delta):
 		self.text_formatted[self.text_display_index].length()
 	)
 	
-	if text_display_index == text_formatted.size() - 1:
+	self.dialogue_prompt.visible = (self.cursor_position == self.text_formatted[self.text_display_index].length())
+	
+	if self.dialogue_prompt.visible:
 		if Input.is_action_just_pressed("move_interact"):
-			self.dismiss()
+			if text_display_index == text_formatted.size() - 1:
+				self.dismiss()
+			else:
+				self.text_display_index += 1
+	else:
+		if Input.is_action_just_pressed("move_interact"):
+			self.cursor_position = self.text_formatted[self.text_display_index].length()
 
 func dismiss():
 	get_tree().paused = false

@@ -4,6 +4,9 @@
 		"A semi-automatic pistol.",
 		"Easy to handle, but not very powerful."
 	],
+	"commands": [
+		"res://items/commands/equip/EquipCommand.tscn"
+	],
 	"range": 64.0,
 	"spread": 1.0,
 	"damage": {
@@ -14,8 +17,8 @@
 	"transmission": "semi_automatic",
 	"cooldown": 0.5,
 	"heat": 0.0,
-	"icon": "res://items/equipment/pistol/handgun_icon.png",
+	"icon": "res://items/equipment/handgun/handgun_icon.png",
 	"sounds": {
-		"attack": "res://items/equipment/pistol/shoot.wav"
+		"attack": "res://items/equipment/handgun/shoot.wav"
 	}
 }

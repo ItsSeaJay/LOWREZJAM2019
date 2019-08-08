@@ -176,12 +176,10 @@ size_flags_horizontal = 3
 custom_constants/separation = 4
 
 [node name="PrimaryContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 56.0
 margin_bottom = 38.0
 
 [node name="LeftContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer"]
-editor/display_folded = true
 margin_right = 20.0
 margin_bottom = 38.0
 

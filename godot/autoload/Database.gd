@@ -1,13 +1,17 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func load_item_metadata(path):
+	var file = File.new()
+	
+	assert(file.file_exists(path))
+	
+	file.open(path, file.READ)
+	
+	var json = JSON.parse(file.get_as_text())
+	
+	file.close()
+	
+	var metadata = json.result
+	metadata["json_file"] = path
+	
+	return metadata
