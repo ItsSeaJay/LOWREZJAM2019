@@ -27,11 +27,13 @@ var direction : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
-var equipment
+var equipment : Dictionary = {}
+var reload_delta : float = 0.0
 
 enum State {
 	Normal,
-	Aiming
+	Aiming,
+	Reloading
 }
 var state = State.Normal
 
@@ -40,12 +42,6 @@ signal died
 
 func _ready():
 	PlayerData.instance = self
-	
-	if PlayerData.position != null:
-		self.position = PlayerData.position
-	
-	if PlayerData.health != null:
-		self.health = PlayerData.health
 	
 	self.connect("died", self, "_on_death")
 
@@ -73,11 +69,18 @@ func _physics_process(delta):
 			
 			self.equipment["heat"] = max(self.equipment["heat"] - delta, 0.0)
 			
-			if Input.is_action_just_released("combat_aim"):
+			if not Input.is_action_pressed("combat_aim"):
 				transition(State.Normal)
 			
 			if equipment != null:
 				handle_attacking()
+		State.Reloading:
+			handle_camera_movement()
+			
+			self.reload_delta = min(self.reload_delta - delta, 0.0)
+			
+			if self.reload_delta == 0.0:
+				transition(State.Aiming)
 
 func handle_movement():
 	self.direction = Vector2.ZERO
@@ -121,8 +124,11 @@ func handle_attacking():
 				equipment["heat"] = equipment["cooldown"]
 		"semi_automatic":
 			if Input.is_action_just_pressed("combat_attack") and equipment["heat"] == 0.0:
-				attack()
-				equipment["heat"] = equipment["cooldown"]
+				if equipment["ammo"] > 0:
+					attack()
+					equipment["heat"] = equipment["cooldown"]
+				else:
+					reload()
 
 func attack():
 	# Figure out what this attack will collide with in the sceen
@@ -136,6 +142,9 @@ func attack():
 		]
 	)
 	
+	# Reduce the the ammount of ammo in the clip
+	equipment["ammo"] -= 1
+	
 	# Give audio feedback that the player has attacked
 	AudioSystem.play_sound(
 		equipment["sounds"]["attack"],
@@ -148,6 +157,11 @@ func attack():
 		var enemy = result["collider"] as Enemy
 		var damage = rand_range(equipment["damage"]["min"], equipment["damage"]["max"])
 		enemy.damage(damage)
+
+func reload():
+	self.reload_delta = equipment["reload_time"]
+	self.equipment["ammo"] = self.equipment["clip_size"]
+	transition(State.Reloading)
 
 func equip(item):
 	if item != null:

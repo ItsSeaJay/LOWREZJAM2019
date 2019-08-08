@@ -13,7 +13,9 @@
 		"min": 25,
 		"max": 33
 	},
-	"clip": 8,
+	"clip_size": 8,
+	"ammo": 8,
+	"reload_time": 1.0,
 	"transmission": "semi_automatic",
 	"cooldown": 0.5,
 	"heat": 0.0,
