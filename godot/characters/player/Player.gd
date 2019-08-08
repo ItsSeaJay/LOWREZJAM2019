@@ -27,7 +27,7 @@ var direction : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
-var equipment : Dictionary = {}
+var equipment
 var reload_delta : float = 0.0
 
 enum State {
@@ -75,9 +75,7 @@ func _physics_process(delta):
 			if equipment != null:
 				handle_attacking()
 		State.Reloading:
-			handle_camera_movement()
-			
-			self.reload_delta = min(self.reload_delta - delta, 0.0)
+			self.reload_delta = max(self.reload_delta - delta, 0.0)
 			
 			if self.reload_delta == 0.0:
 				transition(State.Aiming)
@@ -161,6 +159,11 @@ func attack():
 func reload():
 	self.reload_delta = equipment["reload_time"]
 	self.equipment["ammo"] = self.equipment["clip_size"]
+	AudioSystem.play_sound(
+		self.equipment["sounds"]["reload"],
+		self.position,
+		rand_range(0.9, 1.0)
+	)
 	transition(State.Reloading)
 
 func equip(item):

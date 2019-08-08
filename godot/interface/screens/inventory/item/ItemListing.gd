@@ -17,11 +17,12 @@ func _on_Button_clicked():
 		for command in command_box.get_children():
 			command.queue_free()
 	
-	for command in self.metadata["commands"]:
-		var command_resource = load(command)
-		assert(command_resource != null)
-		
-		var command_listing = command_resource.instance()
-		command_listing.metadata = self.metadata
-		
-		command_box.add_child(command_listing)
+	if self.metadata.has("commands"):
+		for command in self.metadata["commands"]:
+			var command_resource = load(command)
+			assert(command_resource != null)
+			
+			var command_listing = command_resource.instance()
+			command_listing.metadata = self.metadata
+			
+			command_box.add_child(command_listing)

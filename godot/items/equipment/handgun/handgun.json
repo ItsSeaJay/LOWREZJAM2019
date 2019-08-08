@@ -15,12 +15,14 @@
 	},
 	"clip_size": 8,
 	"ammo": 8,
-	"reload_time": 1.0,
+	"reload_time": 1.66,
 	"transmission": "semi_automatic",
 	"cooldown": 0.5,
 	"heat": 0.0,
 	"icon": "res://items/equipment/handgun/handgun_icon.png",
 	"sounds": {
-		"attack": "res://items/equipment/handgun/shoot.wav"
+		"attack": "res://items/equipment/handgun/shoot.wav",
+		"dry_fire": "res://items/equipment/handgun/dry_fire.wav",
+		"reload": "res://items/equipment/handgun/reload.wav"
 	}
 }
