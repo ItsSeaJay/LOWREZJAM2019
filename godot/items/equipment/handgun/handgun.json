@@ -15,6 +15,7 @@
 	},
 	"clip_size": 8,
 	"ammo": 8,
+	"ammo_type": "Handgun Bullet",
 	"reload_time": 1.66,
 	"transmission": "semi_automatic",
 	"cooldown": 0.5,

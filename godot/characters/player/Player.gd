@@ -159,6 +159,7 @@ func attack():
 func reload():
 	self.reload_delta = equipment["reload_time"]
 	self.equipment["ammo"] = self.equipment["clip_size"]
+	self.inventory.remove_item(self.equipment["ammo_type"], self.equipment["clip_size"])
 	AudioSystem.play_sound(
 		self.equipment["sounds"]["reload"],
 		self.position,
