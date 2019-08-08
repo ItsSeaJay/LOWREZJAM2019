@@ -135,8 +135,10 @@ func handle_attacking():
 						AudioSystem.play_sound(
 							self.equipment["sounds"]["dry_fire"],
 							self.position + self.camera.offset,
-							rand_range(0.66, 1.0)
+							rand_range(0.8, 1.0)
 						)
+						# Ensure that the sound doesn't repeat too often
+						equipment["heat"] = equipment["cooldown"]
 
 func attack():
 	# Figure out what this attack will collide with in the sceen
@@ -168,7 +170,15 @@ func attack():
 
 func reload():
 	self.reload_delta = equipment["reload_time"]
-	self.equipment["ammo"] = self.equipment["clip_size"]
+	
+	var item_list_formatted = self.inventory.get_items_formatted()
+	var ammo_remaining = item_list_formatted[self.equipment["ammo_type"]]["quantity"]
+	
+	if ammo_remaining >= self.equipment["clip_size"]:
+		self.equipment["ammo"] = self.equipment["clip_size"]
+	else:
+		self.equipment["ammo"] = ammo_remaining
+	
 	self.inventory.remove_item(self.equipment["ammo_type"], self.equipment["clip_size"])
 	AudioSystem.play_sound(
 		self.equipment["sounds"]["reload"],
