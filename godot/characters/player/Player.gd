@@ -126,7 +126,17 @@ func handle_attacking():
 					attack()
 					equipment["heat"] = equipment["cooldown"]
 				else:
-					reload()
+					var item_list_formatted = self.inventory.get_items_formatted()
+					
+					if item_list_formatted.has(self.equipment["ammo_type"]):
+						self.reload()
+					else:
+						# Give the player some feedback that they are out of ammo
+						AudioSystem.play_sound(
+							self.equipment["sounds"]["dry_fire"],
+							self.position + self.camera.offset,
+							rand_range(0.66, 1.0)
+						)
 
 func attack():
 	# Figure out what this attack will collide with in the sceen
@@ -162,7 +172,7 @@ func reload():
 	self.inventory.remove_item(self.equipment["ammo_type"], self.equipment["clip_size"])
 	AudioSystem.play_sound(
 		self.equipment["sounds"]["reload"],
-		self.position,
+		self.position + self.camera.offset,
 		rand_range(0.9, 1.0)
 	)
 	transition(State.Reloading)

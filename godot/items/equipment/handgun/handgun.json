@@ -1,9 +1,6 @@
 {
 	"name": "Handgun",
-	"description": [
-		"A semi-automatic pistol.",
-		"Easy to handle, but not very powerful."
-	],
+	"description": "A semi-automatic pistol. Easy to handle, but not very powerful.",
 	"commands": [
 		"res://items/commands/equip/EquipCommand.tscn"
 	],
