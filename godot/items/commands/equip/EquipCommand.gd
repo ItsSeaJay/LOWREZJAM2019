@@ -2,7 +2,7 @@ extends Button
 
 onready var player = get_tree().root.get_node("/root/Game/Characters/Player")
 
-var metadata
+var key
 
 func _pressed():
-	player.equip(self.metadata)
+	player.equip(Database.tables["items"][key])

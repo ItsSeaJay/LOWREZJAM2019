@@ -3,7 +3,7 @@
 		"name": "Example",
 		"description": "A placeholder item used for testing purposes. How did you obtain this?"
 	},
-	"handgun": {
+	"equipment_handgun": {
 		"name": "Handgun",
 		"description": "A semi-automatic pistol. Easy to use, but not very powerful.",
 		"commands": [

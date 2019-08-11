@@ -1,14 +1,14 @@
 extends HBoxContainer
 
+export(String) var key = "example"
+
 onready var button = $Button
 onready var command_box = self.get_node("../../../../../PrimaryContainer/RightContainer/CommandBox/VBoxContainer")
 
-var json_file = "res://items/example/example.json"
 var metadata
 
 func _ready():
-	self.metadata = Database.load_item_metadata(json_file)
-	self.button.text = self.metadata["name"]
+	self.button.text = Database.tables["items"][key]["name"]
 	
 	self.button.connect("button_down", self, "_on_Button_clicked")
 
@@ -17,12 +17,12 @@ func _on_Button_clicked():
 		for command in command_box.get_children():
 			command.queue_free()
 	
-	if self.metadata.has("commands"):
-		for command in self.metadata["commands"]:
+	if Database.tables["items"][key].has("commands"):
+		for command in Database.tables["items"][key]["commands"]:
 			var command_resource = load(command)
 			assert(command_resource != null)
 			
 			var command_listing = command_resource.instance()
-			command_listing.metadata = self.metadata
+			command_listing.key = key
 			
 			command_box.add_child(command_listing)
