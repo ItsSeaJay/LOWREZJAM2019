@@ -126,9 +126,7 @@ func handle_attacking():
 					attack()
 					equipment["heat"] = equipment["cooldown"]
 				else:
-					var item_list_formatted = self.inventory.get_items_formatted()
-					
-					if item_list_formatted.has(self.equipment["ammo_type"]):
+					if self.inventory.items.has(self.equipment["ammo_type"]):
 						self.reload()
 					else:
 						# Give the player some feedback that they are out of ammo
@@ -171,8 +169,7 @@ func attack():
 func reload():
 	self.reload_delta = equipment["reload_time"]
 	
-	var item_list_formatted = self.inventory.get_items_formatted()
-	var ammo_remaining = item_list_formatted[self.equipment["ammo_type"]]["quantity"]
+	var ammo_remaining = self.inventory.items[self.equipment["ammo_type"]]
 	
 	if ammo_remaining >= self.equipment["clip_size"]:
 		self.equipment["ammo"] = self.equipment["clip_size"]

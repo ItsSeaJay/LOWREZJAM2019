@@ -42,6 +42,17 @@ func insert_item(key, quantity=1):
 	
 	emit_signal("item_inserted")
 
+func get_item(item_name):
+	var keys = self.items.keys()
+	
+	for item in keys:
+		var item_name_current = Database.tables["items"][item]["name"]
+		
+		if item_name == item_name_current:
+			return Database.tables["items"][item]
+	
+	return null
+
 func remove_item(key, quantity=1):
 	assert(self.items.has(key))
 	
@@ -60,6 +71,8 @@ func find_first_item_instance(item_name):
 	return null
 
 func update_item_list():
+	print(self.items)
+	
 	if self.item_display.get_child_count() > 0:
 		for listing in self.item_display.get_children():
 			listing.queue_free()
