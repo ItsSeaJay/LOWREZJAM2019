@@ -1,0 +1,36 @@
+{
+	"example": {
+		"name": "Example",
+		"description": "A placeholder item used for testing purposes. How did you obtain this?"
+	},
+	"handgun": {
+		"name": "Handgun",
+		"description": "A semi-automatic pistol. Easy to use, but not very powerful.",
+		"commands": [
+			"res://items/commands/equip/EquipCommand.tscn"
+		],
+		"range": 64.0,
+		"spread": 1.0,
+		"damage": {
+			"min": 25,
+			"max": 33
+		},
+		"clip_size": 8,
+		"ammo": 8,
+		"ammo_type": "Handgun Bullet",
+		"reload_time": 1.66,
+		"transmission": "semi_automatic",
+		"cooldown": 0.5,
+		"heat": 0.0,
+		"icon": "res://items/equipment/handgun/handgun_icon.png",
+		"sounds": {
+			"attack": "res://items/equipment/handgun/shoot.wav",
+			"dry_fire": "res://items/equipment/handgun/dry_fire.wav",
+			"reload": "res://items/equipment/handgun/reload.wav"
+		}
+	},
+	"ammo_handgun": {
+		"name": "Handgun Bullet",
+		"description": "Ammo for a handgun. Surprisingly heavy"
+	}
+}

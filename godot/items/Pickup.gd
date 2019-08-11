@@ -4,6 +4,7 @@ const Player = preload("res://characters/player/Player.gd")
 const DialogueBox = preload("res://interface/overlays/dialogue/DialogueBox.gd")
 
 export(String, FILE, "*.json") var json_file = "res://items/example/example.json"
+export(String) var key = "example"
 export(int) var quantity = 1
 
 onready var area = $Area2D
