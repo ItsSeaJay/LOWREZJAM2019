@@ -13,6 +13,9 @@ var look_target : Vector2
 
 export(int) var health_max = 100
 
+export(Dictionary) var starting_items = {}
+export(String) var starting_equipment = null
+
 onready var camera = $Camera2D
 
 onready var inventory = $Interface/Inventory
@@ -30,8 +33,8 @@ var direction : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
-var equipment
 var reload_delta : float = 0.0
+var equipment
 
 enum State {
 	Normal,
@@ -46,6 +49,17 @@ signal died
 func _ready():
 	PlayerData.instance = self
 	
+	if self.starting_items.size() > 0:
+		var keys = self.starting_items.keys()
+		
+		for key in keys:
+			var quantity = self.starting_items[key]
+			
+			self.inventory.insert_item(key, quantity)
+	
+	if self.starting_equipment.length() > 0:
+		self.equip(Database.tables["items"][self.starting_equipment])
+
 	self.connect("died", self, "_on_death")
 
 func _process(delta):
@@ -163,11 +177,13 @@ func attack():
 		rand_range(0.66, 1.0)
 	)
 	
-	# If the attack hit
+	# If the attack hit something
 	if result.size() > 0:
-		var enemy = result["collider"] as Enemy
+		var target = result["collider"]
 		var damage = rand_range(equipment["damage"]["min"], equipment["damage"]["max"])
-		enemy.damage(damage)
+		
+		if target is Enemy:
+			target.damage(damage)
 
 func reload():
 	self.reload_delta = equipment["reload_time"]
@@ -189,9 +205,9 @@ func reload():
 	transition(State.Reloading)
 
 func equip(item):
-	if item != null:
-		self.equipment = item
-		self.equipment_display.get_node("TextureRect").set_texture(load(item["icon"]))
+	assert(item != null)
+	self.equipment = item
+	self.equipment_display.get_node("TextureRect").set_texture(load(item["icon"]))
 
 func heal(amount):
 	self.health = min(health + amount, health_max)
