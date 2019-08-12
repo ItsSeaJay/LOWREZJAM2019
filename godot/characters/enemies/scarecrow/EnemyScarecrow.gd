@@ -1,6 +1,6 @@
 extends "res://characters/enemies/Enemy.gd"
 
-export var vision_radius = 24
+export var vision_radius = 32
 export var movement_speed = 64
 export var padding = 8
 
@@ -18,7 +18,7 @@ func _physics_process(delta):
 	if distance_to_player < vision_radius:
 		self.player_seen = true
 	
-	if self.player_seen and not is_on_screen(visibility_notifier.rect.size.y) and distance_to_player:
+	#if self.player_seen and not is_on_screen(visibility_notifier.rect.size.y) and distance_to_player:
 		var direction = -((self.position - PlayerData.instance.position).normalized())
 		var velocity = move_and_slide(direction * self.movement_speed)
 
