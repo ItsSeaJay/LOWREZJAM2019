@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/player_body_walk_up_left2.png-0f3a6dd1899bada0ebd8eed720a72fba.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://characters/player/body/walk/up_left/player_body_walk_up_left2.png"
+dest_files=[ "res://.import/player_body_walk_up_left2.png-0f3a6dd1899bada0ebd8eed720a72fba.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

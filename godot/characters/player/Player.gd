@@ -30,6 +30,7 @@ const Enemy = preload("res://characters/enemies/Enemy.gd")
 onready var vulnerable : bool = true
 var health : int = self.health_max
 var direction : Vector2
+var direction_last
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
@@ -76,6 +77,43 @@ func _physics_process(delta):
 			handle_look_target()
 			handle_camera_movement()
 			
+			if self.velocity == Vector2.ZERO:
+				match(self.direction_last):
+					Vector2.UP:
+						self.sprite_body.play("idle_up")
+					Vector2(-1.0, -1.0): # Up-left
+						self.sprite_body.play("idle_up_left")
+					Vector2(1.0, -1.0): # Up-right
+						self.sprite_body.play("idle_up_right")
+					Vector2.DOWN:
+						self.sprite_body.play("idle_down")
+					Vector2(-1.0, 1.0): # Down-left
+						self.sprite_body.play("idle_down_left")
+					Vector2(1.0, 1.0): # Down-right
+						self.sprite_body.play("idle_down_right")
+					Vector2.LEFT:
+						self.sprite_body.play("idle_left")
+					Vector2.RIGHT:
+						self.sprite_body.play("idle_right")
+			else:
+				match(self.direction):
+					Vector2.UP:
+						self.sprite_body.play("walk_up")
+					Vector2(-1.0, -1.0): # Up-left
+						self.sprite_body.play("walk_up_left")
+					Vector2(1.0, -1.0): # Up-right
+						self.sprite_body.play("walk_up_right")
+					Vector2.DOWN:
+						self.sprite_body.play("walk_down")
+					Vector2(-1.0, 1.0): # Down-left
+						self.sprite_body.play("walk_down_left")
+					Vector2(1.0, 1.0): # Down-right
+						self.sprite_body.play("walk_down_right")
+					Vector2.LEFT:
+						self.sprite_body.play("walk_left")
+					Vector2.RIGHT:
+						self.sprite_body.play("walk_right")
+			
 			if equipment != null:
 				if Input.is_action_pressed("combat_aim"):
 					if self.velocity.normalized() != Vector2.ZERO:
@@ -96,6 +134,8 @@ func _physics_process(delta):
 			
 			if self.reload_delta == 0.0:
 				transition(State.Aiming)
+	
+	self.direction_last = self.direction
 
 func handle_movement():
 	self.direction = Vector2.ZERO
@@ -228,5 +268,7 @@ func transition(state):
 			self.terminal_velocity = self.walk_speed_normal
 		State.Aiming:
 			self.terminal_velocity = self.walk_speed_aiming
+		State.Reloading:
+			self.sprite_body.play("idle_down")
 	
 	self.state = state

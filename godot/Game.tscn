@@ -46,6 +46,7 @@ starting_items = {
 starting_equipment = "equipment_handgun"
 
 [node name="Light2D" type="Light2D" parent="Characters/Player"]
+z_index = -1
 texture = ExtResource( 4 )
 color = Color( 0.317647, 0.317647, 0.317647, 1 )
 shadow_enabled = true
