@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://characters/enemies/zombie/EnemyZombie.gd" type="Script" id=1]
 [ext_resource path="res://characters/enemies/zombie/zombie.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
 height = 6.0
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -0.0283356, 8.29481, 2.47856, 7.96495, 3.79798, 4.53447, 4.98545, -4.96534, 2.87438, -6.94447, -1.67761, -6.74656, -2.86509, -2.12859, -2.93106, 7.89898 )
 
 [node name="EnemyZombie" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -15,3 +18,7 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+z_index = -1
+occluder = SubResource( 2 )

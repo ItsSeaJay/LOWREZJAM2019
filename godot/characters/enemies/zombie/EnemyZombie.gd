@@ -3,10 +3,11 @@ extends "res://characters/enemies/Enemy.gd"
 export var movement_speed = 16.0
 export var vision_radius = 24.0
 export var attack_distance = 8.0
-export var attack_speed = 2.0
+export var attack_speed = 1.0
 export(Vector2) var pause_time = Vector2(0.0, 1.0)
 export(Vector2) var move_time = Vector2(0.0, 1.0)
 export(float) var alert_time = 1.0
+export(Vector2) var attack_damage = Vector2(25, 33)
 
 var movement_direction = Vector2.ZERO
 
@@ -27,6 +28,7 @@ func _ready():
 	assert(pause_time.x <= pause_time.y)
 	assert(move_time.x <= move_time.y)
 	assert(attack_distance < vision_radius)
+	assert(attack_damage.x <= attack_damage.y)
 	
 	self.connect("enemy_hurt", self, "_on_EnemyZombie_hurt")
 	self.connect("enemy_killed", self, "_on_EnemyZombie_killed")
@@ -65,10 +67,16 @@ func _physics_process(delta):
 			if distance_to_player > vision_radius and timer_alert == 0.0:
 				transition(State.Normal)
 		State.Attacking:
+			self.timer_attack = max(self.timer_attack, 0.0)
+			
+			if self.timer_attack == 0.0:
+				PlayerData.instance.damage(int(rand_range(attack_damage.x, attack_damage.y)))
+				self.timer_attack = attack_speed
+			
 			var distance_to_player = self.position.distance_to(PlayerData.instance.position)
 			
 			if distance_to_player > attack_distance:
-				self.move_and_slide(self.movement_direction * self.movement_speed)
+				transition(State.Alert)
 
 func _on_EnemyZombie_hurt():
 	transition(State.Alert)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://characters/enemies/scarecrow/EnemyScarecrow.gd" type="Script" id=1]
 [ext_resource path="res://characters/enemies/scarecrow/scarecrow.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
 height = 4.0
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -1.84657, 7.87628, 1.90436, 7.81674, 1.9639, 6.56643, 4.1073, 5.07796, 3.8096, 0.850716, 2.73791, 0.0767136, 4.8813, 0.195789, 6.01253, 1.98195, 6.60792, 2.10103, 7.67962, 0.850716, 7.97731, -2.06668, 7.02469, -2.95976, 5.17899, -3.07884, 3.69053, -5.16269, 1.07082, -7.90147, -1.25119, -8.02055, -5.95474, -3.13838, -7.50275, -3.0193, -7.97906, -1.9476, -8.15767, 1.14841, -6.9669, 2.10103, -6.01428, 2.22011, -4.40674, 0.195789, -2.91827, 0.0171738, -3.03735, 1.02933, -4.22812, 1.08887, -4.10904, 4.95889, -2.08473, 6.62597 )
 
 [node name="Scarecrow" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -24,3 +27,7 @@ __meta__ = {
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -3.5, -7, 7, 14 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+z_index = -1
+occluder = SubResource( 2 )
