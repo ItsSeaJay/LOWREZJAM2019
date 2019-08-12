@@ -19,6 +19,9 @@ onready var inventory = $Interface/Inventory
 onready var equipment_display = $Interface/Inventory/MarginContainer/PanelContainer/VBoxContainer/PrimaryContainer/LeftContainer/EquipmentDisplay
 onready var no_equipment_icon = "res://items/equipment/none/none_icon.png"
 
+onready var sprite_body : AnimatedSprite = $Sprites/Body
+onready var sprite_legs : AnimatedSprite = $Sprites/Legs
+
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
 onready var vulnerable : bool = true
@@ -177,6 +180,7 @@ func reload():
 		self.equipment["ammo"] = ammo_remaining
 	
 	self.inventory.remove_item(self.equipment["ammo_type"], self.equipment["clip_size"])
+	
 	AudioSystem.play_sound(
 		self.equipment["sounds"]["reload"],
 		self.position + self.camera.offset,

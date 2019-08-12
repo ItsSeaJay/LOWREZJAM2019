@@ -1,12 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
-[ext_resource path="res://characters/player/player.png" type="Texture" id=2]
-[ext_resource path="res://interface/screens/inventory/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/screens/inventory/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/player/body/player_body_idle_down.png" type="Texture" id=3]
+[ext_resource path="res://characters/player/legs/idle/player_legs_idle_down.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.69782
-height = 3.89042
+radius = 3.0
+height = 7.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
@@ -15,9 +32,6 @@ look_weight = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -28,5 +42,13 @@ drag_margin_bottom = 0.0
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
-[node name="Inventory" parent="Interface" instance=ExtResource( 3 )]
+[node name="Inventory" parent="Interface" instance=ExtResource( 2 )]
 visible = false
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Body" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 3 )
+
+[node name="Legs" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 2 )

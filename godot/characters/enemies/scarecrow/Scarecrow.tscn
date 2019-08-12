@@ -4,8 +4,8 @@
 [ext_resource path="res://characters/enemies/scarecrow/scarecrow.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.99903
-height = 5.67916
+radius = 6.0
+height = 4.0
 
 [node name="Scarecrow" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -21,3 +21,6 @@ texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -3.5, -7, 7, 14 )
