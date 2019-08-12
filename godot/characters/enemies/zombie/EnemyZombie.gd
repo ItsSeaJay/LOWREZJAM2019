@@ -1,15 +1,19 @@
 extends "res://characters/enemies/Enemy.gd"
 
 export var movement_speed = 16.0
-export var vision_radius = 32.0
+export var vision_radius = 24.0
 export var attack_distance = 8.0
+export var attack_speed = 2.0
 export(Vector2) var pause_time = Vector2(0.0, 1.0)
 export(Vector2) var move_time = Vector2(0.0, 1.0)
+export(float) var alert_time = 1.0
 
 var movement_direction = Vector2.ZERO
 
 var timer_pause = rand_range(pause_time.x, pause_time.y)
 var timer_move = rand_range(move_time.x, move_time.y)
+var timer_alert = 0.0
+var timer_attack = 0.0
 
 enum State {
 	Normal,
@@ -48,22 +52,26 @@ func _physics_process(delta):
 			if timer_move == 0.0:
 				transition(State.Normal)
 		State.Alert:
-			self.movement_direction = self.position.direction_to(PlayerData.instance.position)
+			self.timer_alert = max(self.timer_alert - delta, 0.0)
 			
+			self.movement_direction = self.position.direction_to(PlayerData.instance.position)
+			self.move_and_slide(self.movement_direction * self.movement_speed)
+			
+			var distance_to_player = self.position.distance_to(PlayerData.instance.position)
+			
+			if distance_to_player <= attack_distance:
+				transition(State.Attacking)
+			
+			if distance_to_player > vision_radius and timer_alert == 0.0:
+				transition(State.Normal)
+		State.Attacking:
 			var distance_to_player = self.position.distance_to(PlayerData.instance.position)
 			
 			if distance_to_player > attack_distance:
 				self.move_and_slide(self.movement_direction * self.movement_speed)
-			
-			if distance_to_player > vision_radius:
-				transition(State.Normal)
-		State.Attacking:
-			pass
-	
-	print(self.state)
 
 func _on_EnemyZombie_hurt():
-	pass
+	transition(State.Alert)
 
 func _on_EnemyZombie_killed():
 	self.queue_free()
@@ -71,12 +79,12 @@ func _on_EnemyZombie_killed():
 func transition(state):
 	match(state):
 		State.Normal:
-			timer_pause = rand_range(move_time.x, move_time.y)
+			self.timer_pause = rand_range(move_time.x, move_time.y)
 		State.Moving:
-			timer_move = rand_range(move_time.x, move_time.y)
-			movement_direction = Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
+			self.timer_move = rand_range(move_time.x, move_time.y)
+			self.movement_direction = Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
 		State.Alert:
-			pass
+			self.timer_alert = self.alert_time
 		State.Attacking:
 			pass
 	
