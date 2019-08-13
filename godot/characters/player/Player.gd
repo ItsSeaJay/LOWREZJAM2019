@@ -26,6 +26,7 @@ onready var sprite_body : AnimatedSprite = $Sprites/Body
 onready var sprite_legs : AnimatedSprite = $Sprites/Legs
 
 onready var bullet_trail = preload("res://effects/bullet_trail/BulletTrail.tscn")
+onready var muzzle_flash = preload("res://lights/muzzle_flash/MuzzleFlash.tscn")
 
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
@@ -230,6 +231,9 @@ func handle_attacking():
 						equipment["heat"] = equipment["cooldown"]
 
 func attack():
+	# First, figure out where the player is looking
+	var looking = self.look_target.normalized()
+	
 	# Figure out what this attack will collide with in the sceen
 	var space_state : Physics2DDirectSpaceState = get_world_2d().direct_space_state
 	var result = space_state.intersect_ray(
@@ -256,11 +260,14 @@ func attack():
 		Vector2(round(self.position.x), round(self.position.y))
 	)
 	
+	# Show a muzzle flash
+	var muzzle_flash_instance : Node2D = self.muzzle_flash.instance()
+	muzzle_flash_instance.position = self.position + (looking * 4)
+	get_tree().root.add_child(muzzle_flash_instance)
+	
 	# Play an appropriate attack animation
 	self.sprite_body.stop()
 	self.sprite_body.frame = 0
-	
-	var looking = self.look_target.normalized()
 	
 	match(looking):
 		Vector2.UP:
