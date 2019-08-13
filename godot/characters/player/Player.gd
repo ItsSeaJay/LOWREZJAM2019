@@ -25,6 +25,8 @@ onready var no_equipment_icon = "res://items/equipment/none/none_icon.png"
 onready var sprite_body : AnimatedSprite = $Sprites/Body
 onready var sprite_legs : AnimatedSprite = $Sprites/Legs
 
+onready var bullet_trail = preload("res://effects/bullet_trail/BulletTrail.tscn")
+
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
 onready var vulnerable : bool = true
@@ -229,7 +231,7 @@ func handle_attacking():
 
 func attack():
 	# Figure out what this attack will collide with in the sceen
-	var space_state = get_world_2d().direct_space_state
+	var space_state : Physics2DDirectSpaceState = get_world_2d().direct_space_state
 	var result = space_state.intersect_ray(
 		self.position, # Origin
 		self.position + (self.look_target * equipment["range"]), # Target destination
@@ -246,6 +248,12 @@ func attack():
 	AudioSystem.play_sound_formless(
 		equipment["sounds"]["attack"],
 		rand_range(0.66, 1.0)
+	)
+	
+	# Add a bullet trail that shows where the projectile went
+	var bullet_trail_instance : Line2D = self.bullet_trail.instance()
+	bullet_trail_instance.add_point(
+		Vector2(round(self.position.x), round(self.position.y))
 	)
 	
 	# Play an appropriate attack animation
@@ -277,8 +285,19 @@ func attack():
 		var target = result["collider"]
 		var damage = rand_range(equipment["damage"]["min"], equipment["damage"]["max"])
 		
+		bullet_trail_instance.add_point(
+			Vector2(round(target.position.x), round(target.position.y))
+		)
+		
 		if target is Enemy:
 			target.damage(damage)
+	else:
+		bullet_trail_instance.add_point(
+			Vector2(round(self.position.x), round(self.position.y)) + (looking * equipment["range"])
+		)
+	
+	# Add the bullet trail into the scene
+	get_tree().root.add_child(bullet_trail_instance)
 
 func reload():
 	self.reload_delta = equipment["reload_time"]

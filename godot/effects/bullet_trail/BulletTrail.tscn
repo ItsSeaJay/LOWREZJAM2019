@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://effects/bullet_trail/BulletTrail.gd" type="Script" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[node name="BulletTrail" type="Line2D"]
+material = SubResource( 1 )
+width = 1.0
+default_color = Color( 1, 1, 1, 1 )
+texture_mode = 3080292
+script = ExtResource( 1 )
+decay_rate = 4.0
