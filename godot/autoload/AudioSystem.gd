@@ -23,7 +23,7 @@ func play_music(sound):
 	call_deferred("_deferred_instantiate", instance)
 	instance.play_music(sound)
 	
-	return instance
+	return instance.get_node(instance.audio_node.name)
 
 func _deferred_instantiate(instance):
 	get_tree().root.add_child(instance)

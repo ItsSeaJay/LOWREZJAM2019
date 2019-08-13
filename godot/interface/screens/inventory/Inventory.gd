@@ -71,8 +71,6 @@ func find_first_item_instance(item_name):
 	return null
 
 func update_item_list():
-	print(self.items)
-	
 	if self.item_display.get_child_count() > 0:
 		for listing in self.item_display.get_children():
 			listing.queue_free()

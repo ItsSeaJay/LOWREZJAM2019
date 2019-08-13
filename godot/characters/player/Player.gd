@@ -28,14 +28,19 @@ onready var sprite_legs : AnimatedSprite = $Sprites/Legs
 const Enemy = preload("res://characters/enemies/Enemy.gd")
 
 onready var vulnerable : bool = true
+
 var health : int = self.health_max
+
 var direction : Vector2
-var direction_last
+var direction_last : Vector2
 var velocity : Vector2
 var speed : float
 var terminal_velocity : float = self.walk_speed_normal
+
 var reload_delta : float = 0.0
 var equipment
+
+var audio_radio : AudioStreamPlayer
 
 enum State {
 	Normal,
@@ -50,8 +55,6 @@ signal died
 func _ready():
 	PlayerData.instance = self
 	
-	AudioSystem.play_music("res://items/tools/radio/enemy_radio_interference.ogg")
-	
 	if self.starting_items.size() > 0:
 		var keys = self.starting_items.keys()
 		
@@ -62,7 +65,7 @@ func _ready():
 	
 	if self.starting_equipment.length() > 0:
 		self.equip(Database.tables["items"][self.starting_equipment])
-
+	
 	self.connect("died", self, "_on_death")
 
 func _process(delta):
@@ -71,6 +74,15 @@ func _process(delta):
 		get_tree().paused = true
 		
 		inventory.animation_player.play("open")
+	
+	if self.inventory.items.has("tool_radio"):
+		if self.audio_radio == null:
+			self.audio_radio = AudioSystem.play_music("res://items/tools/radio/enemy_radio_interference.ogg")
+		else:
+			if self.get_enemy_count(get_tree().root) != 0:
+				self.audio_radio.volume_db = 0.0
+			else:
+				self.audio_radio.volume_db = -80.0
 
 func _physics_process(delta):
 	match(self.state):
@@ -326,3 +338,15 @@ func transition(state):
 			self.sprite_body.play("idle_down")
 	
 	self.state = state
+
+func get_enemy_count(start):
+	var enemy_count = 0
+	
+	for node in start.get_children():
+		if node is Enemy:
+			enemy_count += 1
+		
+		if node.get_child_count() > 0:
+			enemy_count += get_enemy_count(node)
+	
+	return enemy_count

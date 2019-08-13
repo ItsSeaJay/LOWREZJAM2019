@@ -50,6 +50,18 @@ position = Vector2( 184, 76.5 )
 [node name="EnemyZombie" parent="Characters" instance=ExtResource( 5 )]
 position = Vector2( 64, 62 )
 
+[node name="EnemyZombie2" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 148.366, 123.084 )
+
+[node name="EnemyZombie3" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 280.799, 89.0373 )
+
+[node name="EnemyZombie4" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 265.528, 37.7165 )
+
+[node name="EnemyZombie5" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 233.984, 121.332 )
+
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
