@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://items/commands/examine/ExamineCommand.gd" type="Script" id=1]
+
+[node name="ExamineCommand" type="Button"]
+margin_right = 28.0
+margin_bottom = 3.0
+text = "Examine"
+script = ExtResource( 1 )

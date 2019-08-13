@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.png" type="Texture" id=2]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://items/tools/radio/RadioPickup.tscn" type="PackedScene" id=4]
 
 [sub_resource type="TileSet" id=1]
 0/name = "exterior_snow.png 0"
@@ -41,6 +42,9 @@ starting_items = {
 "equipment_handgun": 1
 }
 starting_equipment = "equipment_handgun"
+
+[node name="RadioPickup" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 184, 72 )
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
