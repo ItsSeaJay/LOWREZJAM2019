@@ -77,7 +77,10 @@ func _process(delta):
 	
 	if self.inventory.items.has("tool_radio"):
 		if self.audio_radio == null:
-			self.audio_radio = AudioSystem.play_music("res://items/tools/radio/enemy_radio_interference.ogg")
+			self.audio_radio = AudioSystem.play_music(
+				"res://items/tools/radio/enemy_radio_interference.ogg",
+				Node.PAUSE_MODE_PROCESS
+			)
 		else:
 			if self.get_enemy_count(get_tree().root) != 0:
 				self.audio_radio.volume_db = 0.0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/TypeClicksFluteJP-003.wav-746d57d2828374334e9558421e5e14ca.sample"
+
+[deps]
+
+source_file="res://interface/overlays/dialogue/TypeClicksFluteJP-003.wav"
+dest_files=[ "res://.import/TypeClicksFluteJP-003.wav-746d57d2828374334e9558421e5e14ca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

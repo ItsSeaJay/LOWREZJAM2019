@@ -10,16 +10,21 @@ func play_sound_formless(sound, pitch=1.0):
 	
 	get_tree().root.add_child(instance)
 	instance.play_sound(sound, pitch)
+	
+	return instance
 
 func play_sound_positional(sound, position, pitch=1.0):
 	var instance = audio_player_positional.instance()
 	
 	get_tree().root.add_child(instance)
 	instance.play_sound(sound, position, pitch)
+	
+	return instance
 
-func play_music(sound):
+func play_music(sound, mode=Node.PAUSE_MODE_INHERIT):
 	var instance = music_player.instance()
 	
+	instance.pause_mode = mode
 	call_deferred("_deferred_instantiate", instance)
 	instance.play_music(sound)
 	

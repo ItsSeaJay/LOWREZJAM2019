@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.png" type="Texture" id=2]
-[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://items/tools/radio/RadioPickup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://items/equipment/handgun/ammo/HandgunAmmoPickup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
@@ -36,16 +36,29 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="Characters" type="YSort" parent="."]
 
-[node name="Player" parent="Characters" instance=ExtResource( 3 )]
+[node name="HandgunAmmoPickup" parent="Characters" instance=ExtResource( 3 )]
+position = Vector2( 163.508, 79.0657 )
+
+[node name="HandgunAmmoPickup4" parent="Characters" instance=ExtResource( 3 )]
+position = Vector2( 200, 136 )
+
+[node name="HandgunAmmoPickup5" parent="Characters" instance=ExtResource( 3 )]
+position = Vector2( 248, 70 )
+
+[node name="HandgunAmmoPickup3" parent="Characters" instance=ExtResource( 3 )]
+position = Vector2( 120, 48 )
+
+[node name="HandgunAmmoPickup2" parent="Characters" instance=ExtResource( 3 )]
+position = Vector2( 88, 112 )
+
+[node name="Player" parent="Characters" instance=ExtResource( 4 )]
 position = Vector2( 184, 56 )
 starting_items = {
-"ammo_handgun": 99,
-"equipment_handgun": 1
+"ammo_handgun": 8,
+"equipment_handgun": 1,
+"tool_radio": 1
 }
 starting_equipment = "equipment_handgun"
-
-[node name="RadioPickup" parent="Characters" instance=ExtResource( 4 )]
-position = Vector2( 184, 76.5 )
 
 [node name="EnemyZombie" parent="Characters" instance=ExtResource( 5 )]
 position = Vector2( 64, 62 )
