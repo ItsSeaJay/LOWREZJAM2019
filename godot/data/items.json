@@ -3,6 +3,22 @@
 		"name": "Example",
 		"description": "A placeholder item used for testing purposes. How did you obtain this?"
 	},
+	"tool_radio": {
+		"name": "Radio",
+		"description": "The two-way standard station radio. It seems to be malfunctioning."
+	},
+	"tool_flashlight": {
+		"name": "Flashlight",
+		"description": "A basic source of light. It's got a clip on one side for hands-free use."
+	},
+	"consumable_health_small": {
+		"name": "Painkiller",
+		"description": "A bottle of liquid paracetamol. Not the most effective, but it'll do."
+	},
+	"consumable_health_large": {
+		"name": "Medkit",
+		"description": "Station medkit containing bandages, disinfection gel and more. Could save your life in a pinch."
+	},
 	"equipment_handgun": {
 		"name": "Handgun",
 		"description": "A semi-automatic pistol. Easy to use, but not very powerful.",
@@ -29,8 +45,38 @@
 			"reload": "res://items/equipment/handgun/reload.wav"
 		}
 	},
+	"equipment_shotgun": {
+		"name": "Shotgun",
+		"description": "A double-barreled shotgun. Hard-hitting, but slow to reload.",
+		"commands": [
+			"res://items/commands/equip/EquipCommand.tscn"
+		],
+		"range": 16.0,
+		"spread": 8.0,
+		"damage": {
+			"min": 50,
+			"max": 75
+		},
+		"clip_size": 6,
+		"ammo": 6,
+		"ammo_type": "ammo_shotgun",
+		"reload_time": 3.0,
+		"transmission": "semi_automatic",
+		"cooldown": 1.0,
+		"heat": 0.0,
+		"icon": "res://items/equipment/handgun/handgun_icon.png",
+		"sounds": {
+			"attack": "res://items/equipment/handgun/shoot.wav",
+			"dry_fire": "res://items/equipment/handgun/dry_fire.wav",
+			"reload": "res://items/equipment/handgun/reload.wav"
+		}
+	},
 	"ammo_handgun": {
 		"name": "Handgun Bullet",
-		"description": "Ammo for a handgun. Surprisingly heavy"
+		"description": "Ammo for a handgun. Surprisingly heavy."
+	},
+	"ammo_shotgun": {
+		"name": "Shotgun Shell",
+		"description": "Ammo for a shotgun. 8 gauge hunting slugs."
 	}
 }
