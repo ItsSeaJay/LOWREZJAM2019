@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/enemy_radio_interference.ogg-ca9df5d47e91531ca46062885ec55008.oggstr"
+
+[deps]
+
+source_file="res://items/tools/radio/enemy_radio_interference.ogg"
+dest_files=[ "res://.import/enemy_radio_interference.ogg-ca9df5d47e91531ca46062885ec55008.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

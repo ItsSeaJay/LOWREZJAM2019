@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/shoot.wav-636992c5dae81b6bcad658a7e69bc02b.sample"
+path="res://.import/attack.wav-b48c92848a593208f5006dc9193b79a9.sample"
 
 [deps]
 
-source_file="res://items/equipment/handgun/shoot.wav"
-dest_files=[ "res://.import/shoot.wav-636992c5dae81b6bcad658a7e69bc02b.sample" ]
+source_file="res://items/equipment/handgun/attack.wav"
+dest_files=[ "res://.import/attack.wav-b48c92848a593208f5006dc9193b79a9.sample" ]
 
 [params]
 

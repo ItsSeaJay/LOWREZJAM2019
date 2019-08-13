@@ -50,6 +50,8 @@ signal died
 func _ready():
 	PlayerData.instance = self
 	
+	AudioSystem.play_music("res://items/tools/radio/enemy_radio_interference.ogg")
+	
 	if self.starting_items.size() > 0:
 		var keys = self.starting_items.keys()
 		
@@ -203,9 +205,8 @@ func handle_attacking():
 						self.reload()
 					else:
 						# Give the player some feedback that they are out of ammo
-						AudioSystem.play_sound(
+						AudioSystem.play_sound_formless(
 							self.equipment["sounds"]["dry_fire"],
-							self.position + self.camera.offset,
 							rand_range(0.8, 1.0)
 						)
 						# Ensure that the sound doesn't repeat too often
@@ -227,9 +228,8 @@ func attack():
 	equipment["ammo"] -= 1
 	
 	# Give audio feedback that the player has attacked
-	AudioSystem.play_sound(
+	AudioSystem.play_sound_formless(
 		equipment["sounds"]["attack"],
-		self.position + self.camera.offset,
 		rand_range(0.66, 1.0)
 	)
 	
@@ -277,11 +277,7 @@ func reload():
 	
 	self.inventory.remove_item(self.equipment["ammo_type"], self.equipment["clip_size"])
 	
-	AudioSystem.play_sound(
-		self.equipment["sounds"]["reload"],
-		self.position + self.camera.offset,
-		rand_range(0.9, 1.0)
-	)
+	AudioSystem.play_sound_formless(self.equipment["sounds"]["reload"])
 	transition(State.Reloading)
 
 func equip(item):
@@ -309,7 +305,7 @@ func transition(state):
 		State.Aiming:
 			self.terminal_velocity = self.walk_speed_aiming
 			
-			match(self.direction):
+			match(self.position.direction_to(self.position + self.look_target)):
 				Vector2.UP:
 					self.sprite_body.play("equipment_handgun_aim_up")
 				Vector2(-1.0, -1.0): # Up-left

@@ -38,8 +38,8 @@
 		"name": "Handgun",
 		"description": "A semi-automatic pistol. Easy to use, but not very powerful.",
 		"commands": [
-			"res://items/commands/equip/EquipCommand.tscn",
-			"res://items/commands/examine/ExamineCommand.tscn"
+			"res://items/commands/examine/ExamineCommand.tscn",
+			"res://items/commands/equip/EquipCommand.tscn"
 		],
 		"range": 64.0,
 		"spread": 1.0,
@@ -56,7 +56,7 @@
 		"heat": 0.0,
 		"icon": "res://items/equipment/handgun/handgun_icon.png",
 		"sounds": {
-			"attack": "res://items/equipment/handgun/shoot.wav",
+			"attack": "res://items/equipment/handgun/attack.wav",
 			"dry_fire": "res://items/equipment/handgun/dry_fire.wav",
 			"reload": "res://items/equipment/handgun/reload.wav"
 		}

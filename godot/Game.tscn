@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.png" type="Texture" id=2]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://items/tools/radio/RadioPickup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "exterior_snow.png 0"
@@ -44,9 +45,15 @@ starting_items = {
 starting_equipment = "equipment_handgun"
 
 [node name="RadioPickup" parent="Characters" instance=ExtResource( 4 )]
-position = Vector2( 184, 72 )
+position = Vector2( 184, 76.5 )
+
+[node name="EnemyZombie" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 64, 62 )
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.462745, 0.478431, 0.607843, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
