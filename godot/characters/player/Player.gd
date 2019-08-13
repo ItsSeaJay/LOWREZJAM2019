@@ -81,38 +81,54 @@ func _physics_process(delta):
 				match(self.direction_last):
 					Vector2.UP:
 						self.sprite_body.play("idle_up")
+						self.sprite_legs.play("idle_up")
 					Vector2(-1.0, -1.0): # Up-left
 						self.sprite_body.play("idle_up_left")
+						self.sprite_legs.play("idle_up_left")
 					Vector2(1.0, -1.0): # Up-right
 						self.sprite_body.play("idle_up_right")
+						self.sprite_legs.play("idle_up_right")
 					Vector2.DOWN:
 						self.sprite_body.play("idle_down")
+						self.sprite_legs.play("idle_down")
 					Vector2(-1.0, 1.0): # Down-left
 						self.sprite_body.play("idle_down_left")
+						self.sprite_legs.play("idle_down_left")
 					Vector2(1.0, 1.0): # Down-right
 						self.sprite_body.play("idle_down_right")
+						self.sprite_legs.play("idle_down_right")
 					Vector2.LEFT:
 						self.sprite_body.play("idle_left")
+						self.sprite_legs.play("idle_left")
 					Vector2.RIGHT:
 						self.sprite_body.play("idle_right")
+						self.sprite_legs.play("idle_right")
 			else:
 				match(self.direction):
 					Vector2.UP:
 						self.sprite_body.play("walk_up")
+						self.sprite_legs.play("walk_up")
 					Vector2(-1.0, -1.0): # Up-left
 						self.sprite_body.play("walk_up_left")
+						self.sprite_legs.play("walk_up_left")
 					Vector2(1.0, -1.0): # Up-right
 						self.sprite_body.play("walk_up_right")
+						self.sprite_legs.play("walk_up_right")
 					Vector2.DOWN:
 						self.sprite_body.play("walk_down")
+						self.sprite_legs.play("walk_down")
 					Vector2(-1.0, 1.0): # Down-left
 						self.sprite_body.play("walk_down_left")
+						self.sprite_legs.play("walk_down_left")
 					Vector2(1.0, 1.0): # Down-right
 						self.sprite_body.play("walk_down_right")
+						self.sprite_legs.play("walk_down_right")
 					Vector2.LEFT:
 						self.sprite_body.play("walk_left")
+						self.sprite_legs.play("walk_left")
 					Vector2.RIGHT:
 						self.sprite_body.play("walk_right")
+						self.sprite_legs.play("walk_right")
 			
 			if equipment != null:
 				if Input.is_action_pressed("combat_aim"):
@@ -217,6 +233,30 @@ func attack():
 		rand_range(0.66, 1.0)
 	)
 	
+	# Play an appropriate attack animation
+	self.sprite_body.stop()
+	self.sprite_body.frame = 0
+	
+	var looking = self.look_target.normalized()
+	
+	match(looking):
+		Vector2.UP:
+			self.sprite_body.play("equipment_handgun_fire_up")
+		Vector2(-1.0, -1.0): # Up-left
+			self.sprite_body.play("equipment_handgun_fire_up_left")
+		Vector2(1.0, -1.0): # Up-right
+			self.sprite_body.play("equipment_handgun_fire_up_right")
+		Vector2.DOWN:
+			self.sprite_body.play("equipment_handgun_fire_down")
+		Vector2(-1.0, 1.0): # Down-left
+			self.sprite_body.play("equipment_handgun_fire_down_left")
+		Vector2(1.0, 1.0): # Down-right
+			self.sprite_body.play("equipment_handgun_fire_down_right")
+		Vector2.LEFT:
+			self.sprite_body.play("equipment_handgun_fire_left")
+		Vector2.RIGHT:
+			self.sprite_body.play("equipment_handgun_fire_right")
+	
 	# If the attack hit something
 	if result.size() > 0:
 		var target = result["collider"]
@@ -268,6 +308,24 @@ func transition(state):
 			self.terminal_velocity = self.walk_speed_normal
 		State.Aiming:
 			self.terminal_velocity = self.walk_speed_aiming
+			
+			match(self.direction):
+				Vector2.UP:
+					self.sprite_body.play("equipment_handgun_aim_up")
+				Vector2(-1.0, -1.0): # Up-left
+					self.sprite_body.play("equipment_handgun_aim_up_left")
+				Vector2(1.0, -1.0): # Up-right
+					self.sprite_body.play("equipment_handgun_aim_up_right")
+				Vector2.DOWN:
+					self.sprite_body.play("equipment_handgun_aim_down")
+				Vector2(-1.0, 1.0): # Down-left
+					self.sprite_body.play("equipment_handgun_aim_down_left")
+				Vector2(1.0, 1.0): # Down-right
+					self.sprite_body.play("equipment_handgun_aim_down_right")
+				Vector2.LEFT:
+					self.sprite_body.play("equipment_handgun_aim_left")
+				Vector2.RIGHT:
+					self.sprite_body.play("equipment_handgun_aim_right")
 		State.Reloading:
 			self.sprite_body.play("idle_down")
 	
