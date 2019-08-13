@@ -38,7 +38,10 @@ func _on_Inventory_changed():
 	update_item_list()
 
 func insert_item(key, quantity=1):
-	self.items[key] = quantity
+	if self.items.has(key):
+		self.items[key] += quantity
+	else:
+		self.items[key] = quantity
 	
 	emit_signal("item_inserted")
 
