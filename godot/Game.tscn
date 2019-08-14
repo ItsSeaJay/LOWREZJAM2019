@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.png" type="Texture" id=2]
-[ext_resource path="res://items/equipment/handgun/ammo/HandgunAmmoPickup.tscn" type="PackedScene" id=3]
-[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://props/foliage/tree/Tree.tscn" type="PackedScene" id=4]
 
 [sub_resource type="TileSet" id=1]
 0/name = "exterior_snow.png 0"
@@ -36,22 +35,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="Characters" type="YSort" parent="."]
 
-[node name="HandgunAmmoPickup" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 163.508, 79.0657 )
-
-[node name="HandgunAmmoPickup4" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 200, 136 )
-
-[node name="HandgunAmmoPickup5" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 248, 70 )
-
-[node name="HandgunAmmoPickup3" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 120, 48 )
-
-[node name="HandgunAmmoPickup2" parent="Characters" instance=ExtResource( 3 )]
-position = Vector2( 88, 112 )
-
-[node name="Player" parent="Characters" instance=ExtResource( 4 )]
+[node name="Player" parent="Characters" instance=ExtResource( 3 )]
 position = Vector2( 184, 56 )
 starting_items = {
 "ammo_handgun": 8,
@@ -60,20 +44,17 @@ starting_items = {
 }
 starting_equipment = "equipment_handgun"
 
-[node name="EnemyZombie" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 64, 62 )
+[node name="Tree" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 144, 28 )
 
-[node name="EnemyZombie2" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 148.366, 123.084 )
+[node name="Tree2" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 156.5, 24 )
 
-[node name="EnemyZombie3" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 280.799, 89.0373 )
+[node name="Tree3" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 176, 28 )
 
-[node name="EnemyZombie4" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 265.528, 37.7165 )
-
-[node name="EnemyZombie5" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 233.984, 121.332 )
+[node name="Tree4" parent="Characters" instance=ExtResource( 4 )]
+position = Vector2( 192, 24 )
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 

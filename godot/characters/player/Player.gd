@@ -43,7 +43,14 @@ var terminal_velocity : float = self.walk_speed_normal
 var reload_delta : float = 0.0
 var equipment
 
-var audio_radio : AudioStreamPlayer
+onready var audio_radio : AudioStreamPlayer = AudioSystem.play_music(
+	"res://items/tools/radio/enemy_radio_interferance.ogg",
+	Node.PAUSE_MODE_PROCESS
+)
+onready var audio_heartbeat : AudioStreamPlayer = AudioSystem.play_music(
+	"res://characters/player/heartbeat.wav",
+	Node.PAUSE_MODE_PROCESS
+)
 
 enum State {
 	Normal,
@@ -79,16 +86,15 @@ func _process(delta):
 		inventory.animation_player.play("open")
 	
 	if self.inventory.items.has("tool_radio"):
-		if self.audio_radio == null:
-			self.audio_radio = AudioSystem.play_music(
-				"res://items/tools/radio/enemy_radio_interference.ogg",
-				Node.PAUSE_MODE_PROCESS
-			)
+		if self.get_enemy_count(get_tree().root) > 0:
+			self.audio_radio.volume_db = 0.0
 		else:
-			if self.get_enemy_count(get_tree().root) != 0:
-				self.audio_radio.volume_db = 0.0
-			else:
-				self.audio_radio.volume_db = -80.0
+			self.audio_radio.volume_db = -80.0
+	
+	if self.health <= self.health_max / 2:
+		self.audio_heartbeat.volume_db = 0.0
+	else:
+		self.audio_heartbeat.volume_db = -80.0
 
 func _physics_process(delta):
 	match(self.state):
@@ -199,6 +205,8 @@ func handle_movement():
 
 func _on_death():
 	SceneChanger.change_scene("res://interface/screens/game_over/GameOver.tscn")
+	self.audio_heartbeat.stop()
+	self.audio_radio.stop()
 
 func handle_look_target():
 	self.look_target = self.direction * self.look_distance
@@ -332,9 +340,9 @@ func heal(amount):
 
 func damage(amount):
 	if vulnerable:
-		self.health = max(health - amount, 0)
-	
-		if health > 0:
+		self.health = max(self.health - amount, 0)
+		
+		if self.health > 0:
 			self.emit_signal("health_changed")
 		else:
 			self.emit_signal("died")

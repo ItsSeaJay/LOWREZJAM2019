@@ -2,7 +2,7 @@ extends "res://characters/enemies/Enemy.gd"
 
 export var movement_speed = 16.0
 export var vision_radius = 24.0
-export var attack_distance = 8.0
+export var attack_distance = 12.0
 export var attack_speed = 1.0
 export(Vector2) var pause_time = Vector2(0.0, 1.0)
 export(Vector2) var move_time = Vector2(0.0, 1.0)
