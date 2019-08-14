@@ -73,7 +73,7 @@ func _ready():
 			
 			self.inventory.insert_item(key, quantity)
 	
-	if self.starting_equipment.length() > 0:
+	if self.starting_equipment != null:
 		self.equip(Database.tables["items"][self.starting_equipment])
 	
 	self.connect("died", self, "_on_death")
