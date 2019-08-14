@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://maps/interior/cave/StartingCaveInteriorMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,8 +9,3 @@ script = ExtResource( 1 )
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
 [node name="StartingCaveInteriorMap" parent="." instance=ExtResource( 2 )]
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 85.0556, 77.4236 )
-
-[node name="Particles2D" type="Particles2D" parent="."]

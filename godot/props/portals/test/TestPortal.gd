@@ -8,5 +8,4 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		PlayerData.position = destination
 		SceneChanger.change_scene(scene_path)

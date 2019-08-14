@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.tres" type="TileSet" id=1]
 [ext_resource path="res://props/corpses/palmer/PalmerCorpse.tscn" type="PackedScene" id=2]
-[ext_resource path="res://lights/basic/basic_light_32x32.png" type="Texture" id=3]
+[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://lights/basic/basic_light_32x32.png" type="Texture" id=4]
+[ext_resource path="res://maps/interior/cave/whistling_wind.wav" type="AudioStream" id=5]
+[ext_resource path="res://maps/interior/cave/dark_cave_drone.wav" type="AudioStream" id=6]
+[ext_resource path="res://interface/prompts/keyboard/movement/KeyboardMovementPrompt.tscn" type="PackedScene" id=7]
 
 [node name="StartingCaveInteriorMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -19,8 +23,24 @@ color = Color( 0.309804, 0.388235, 0.447059, 1 )
 [node name="PalmerCorpse" parent="Entities" instance=ExtResource( 2 )]
 position = Vector2( 73, 70 )
 
+[node name="Player" parent="Entities" instance=ExtResource( 3 )]
+position = Vector2( 93.4692, 87.8946 )
+
 [node name="ExteriorLight" type="Light2D" parent="."]
 position = Vector2( 190.867, 88.8023 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="WindNoise" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 185.767, 87.8946 )
+stream = ExtResource( 5 )
+volume_db = -16.0
+autoplay = true
+attenuation = 1.1487
+
+[node name="CaveDroneNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="PromptsLayer" type="CanvasLayer" parent="."]
+
+[node name="KeyboardMovementPrompt" parent="PromptsLayer" instance=ExtResource( 7 )]
