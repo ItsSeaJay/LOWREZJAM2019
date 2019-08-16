@@ -102,6 +102,8 @@ func _ready():
 	if self.starting_equipment != null:
 		self.equip(Database.tables["items"][self.starting_equipment])
 	
+	self.inventory.update_item_list()
+	
 	self.connect("died", self, "_on_death")
 	inventory.connect("item_inserted", self, "_on_Inventory_item_inserted")
 
