@@ -36,6 +36,7 @@ PlayerData="*res://autoload/PlayerData.gd"
 AudioSystem="*res://autoload/AudioSystem.gd"
 Database="*res://autoload/Database.gd"
 SceneChanger="*res://autoload/scene_changer/SceneChanger.tscn"
+InterfaceLayer="*res://interface/InterfaceLayer.tscn"
 
 [display]
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ZombieCallJP2.wav-a94e6cdda82dc7db0f8f51d0b44da249.sample"
+
+[deps]
+
+source_file="res://characters/enemies/zombie/ZombieCallJP2.wav"
+dest_files=[ "res://.import/ZombieCallJP2.wav-a94e6cdda82dc7db0f8f51d0b44da249.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

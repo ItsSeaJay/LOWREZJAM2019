@@ -26,9 +26,10 @@ func change_scene(path, transition_in="fade", transition_out=null):
 	else:
 		animation_player.play_backwards(transition_in)
 	
+	get_tree().paused = false
+	
 	yield(animation_player, "animation_finished")
 	
-	get_tree().paused = false
 	emit_signal("scene_changed")
 
 func _deferred_scene_change(path):

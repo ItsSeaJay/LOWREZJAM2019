@@ -103,6 +103,7 @@ func _ready():
 		self.equip(Database.tables["items"][self.starting_equipment])
 	
 	self.connect("died", self, "_on_death")
+	inventory.connect("item_inserted", self, "_on_Inventory_item_inserted")
 
 func _process(delta):
 	# Allow the inventory screen to be opened by the player when the game isn't paused elsewhere
@@ -216,6 +217,9 @@ func _physics_process(delta):
 				transition(State.Aiming)
 	
 	self.direction_last = self.direction
+
+func _on_Inventory_item_inserted():
+	PlayerData.target_items = self.inventory.items
 
 func handle_persistant_data():
 	PlayerData.instance = self

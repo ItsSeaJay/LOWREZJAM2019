@@ -8,7 +8,7 @@ export(int) var quantity = 1
 
 onready var area = $Area2D
 onready var dialogue_box = preload("res://interface/overlays/dialogue/DialogueBox.tscn")
-onready var dialogue_layer = get_tree().root.get_node("/root/Game/DialogueLayer")
+onready var dialogue_layer = get_tree().root.get_node("/root/InterfaceLayer")
 
 var within_reach = false
 
@@ -19,6 +19,8 @@ func _ready():
 	area.connect("body_exited", self, "_on_Area2D_body_exited")
 	
 	self.connect("picked_up", self, "_on_pick_up")
+	
+	get_tree().root.add_child(self.dialogue_layer)
 
 func _process(delta):
 	if self.within_reach and Input.is_action_just_pressed("move_interact"):
