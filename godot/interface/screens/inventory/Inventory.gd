@@ -20,9 +20,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel") and not animation_player.is_playing() and self.visible:
 		get_tree().paused = false
 		animation_player.play("close")
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		PlayerData.instance.damage(10)
 
 func _on_Player_health_changed():
 	var background_shader : ShaderMaterial = health_display.get_node("Background").material as ShaderMaterial

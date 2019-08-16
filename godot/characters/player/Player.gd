@@ -6,6 +6,32 @@ export(float) var walk_speed_normal = 32.0
 export(float) var walk_speed_aiming = 16.0
 export(float) var walk_acceleration = 1.0
 export(float) var walk_friction = 1.0
+export(Dictionary) var walk_footstep_sounds = {
+	"snow": [
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-001.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-002.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-003.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-004.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-005.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-006.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-007.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-008.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-010.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-011.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-012.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-013.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-014.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-015.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-016.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-017.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-018.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-019.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-020.wav",
+		"res://characters/player/footsteps/snow/FootstepsSnowJP-021.wav"
+	]
+}
+export(float) var walk_footstep_time = 0.5
+onready var walk_footstep_delta = walk_footstep_time
 
 export(float) var look_distance = 8.0
 export(float) var look_weight = 0.4
@@ -63,7 +89,7 @@ signal health_changed
 signal died
 
 func _ready():
-	PlayerData.instance = self
+	self.handle_persistant_data()
 	
 	if self.starting_items.size() > 0:
 		var keys = self.starting_items.keys()
@@ -95,6 +121,18 @@ func _process(delta):
 		self.audio_heartbeat.volume_db = 0.0
 	else:
 		self.audio_heartbeat.volume_db = -80.0
+	
+	if self.velocity != Vector2.ZERO:
+		self.walk_footstep_delta = max(self.walk_footstep_delta - delta, 0.0)
+		
+		if self.walk_footstep_delta == 0.0:
+			AudioSystem.play_music(
+				self.walk_footstep_sounds["snow"][int(rand_range(0, self.walk_footstep_sounds["snow"].size()))],
+				rand_range(0.8, 1.2)
+			)
+			self.walk_footstep_delta = self.walk_footstep_time
+	else:
+		self.walk_footstep_delta = 0.0
 
 func _physics_process(delta):
 	match(self.state):
@@ -178,6 +216,18 @@ func _physics_process(delta):
 				transition(State.Aiming)
 	
 	self.direction_last = self.direction
+
+func handle_persistant_data():
+	PlayerData.instance = self
+	
+	if PlayerData.target_health != null:
+		self.health = PlayerData.target_health
+	
+	if PlayerData.target_items != null:
+		self.inventory.items = PlayerData.target_items
+	
+	if PlayerData.target_position != null:
+		self.position = PlayerData.target_position
 
 func handle_movement():
 	self.direction = Vector2.ZERO

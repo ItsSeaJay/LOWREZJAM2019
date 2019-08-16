@@ -1,6 +1,7 @@
 extends Node
 
-#onready var health = null
-#onready var position = null
-#onready var items = []
+onready var target_health = null
+onready var target_position = null
+onready var target_items = null
+
 onready var instance = null

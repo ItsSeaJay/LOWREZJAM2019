@@ -42,9 +42,11 @@ func dismiss():
 
 func set_text(text):
 	self.text_raw = text
-	self.text_formatted = format_text(text)
+	
+	if text is Array:
+		text_formatted = text
+	else:
+		self.text_formatted = format_text(text)
 
 func format_text(text):
-	var display_list = [ text ]
-	
-	return display_list
+	return text.split("\n")

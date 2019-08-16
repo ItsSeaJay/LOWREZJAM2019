@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FootstepsSnowJP-021.wav-e61dc4ae9e47a9863aeafad8d17e84a3.sample"
+
+[deps]
+
+source_file="res://characters/player/footsteps/snow/FootstepsSnowJP-021.wav"
+dest_files=[ "res://.import/FootstepsSnowJP-021.wav-e61dc4ae9e47a9863aeafad8d17e84a3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

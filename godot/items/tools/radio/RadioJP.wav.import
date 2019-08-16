@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/RadioJP.wav-56b78ab842e16808fa324f5c12f5a4bb.sample"
+
+[deps]
+
+source_file="res://items/tools/radio/RadioJP.wav"
+dest_files=[ "res://.import/RadioJP.wav-56b78ab842e16808fa324f5c12f5a4bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
