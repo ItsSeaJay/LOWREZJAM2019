@@ -19,4 +19,9 @@ color = Color( 0.2, 0.247059, 0.364706, 1 )
 position = Vector2( 193.496, 233.568 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 191.052, 410.532 )
+position = Vector2( 191, 410 )
+starting_items = {
+"ammo_handgun": 7,
+"equipment_handgun": 1
+}
+starting_equipment = "equipment_handgun"

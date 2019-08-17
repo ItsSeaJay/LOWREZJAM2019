@@ -1333,6 +1333,7 @@ position = Vector2( 483.327, 261.152 )
 position = Vector2( 564.223, 70.6792 )
 scale = Vector2( 2.34629, 0.349757 )
 target_scene = "res://maps/exterior/forest/ForestExit.tscn"
+destination_position = Vector2( 191, 410 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.588235, 0.4, 0.4, 1 )

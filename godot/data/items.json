@@ -41,7 +41,7 @@
 			"res://items/commands/examine/ExamineCommand.tscn",
 			"res://items/commands/equip/EquipCommand.tscn"
 		],
-		"range": 64.0,
+		"range": 32.0,
 		"spread": 1.0,
 		"damage": {
 			"min": 25,

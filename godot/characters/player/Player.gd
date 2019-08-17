@@ -70,7 +70,7 @@ var reload_delta : float = 0.0
 var equipment
 
 onready var audio_radio : AudioStreamPlayer = AudioSystem.play_music(
-	"res://items/tools/radio/enemy_radio_interferance.ogg",
+	"res://items/tools/radio/enemy_radio_interference.ogg",
 	Node.PAUSE_MODE_PROCESS
 )
 onready var audio_heartbeat : AudioStreamPlayer = AudioSystem.play_music(
@@ -90,6 +90,10 @@ signal died
 
 func _ready():
 	self.handle_persistant_data()
+	
+	# Nasty hack for misbehaving audio
+	self.audio_radio.volume_db = -80.0
+	self.audio_heartbeat.volume_db = -80.0
 	
 	if self.starting_items.size() > 0:
 		var keys = self.starting_items.keys()
