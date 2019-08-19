@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tilesets/exterior/snow/exterior_snow.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://props/buildings/cabin/Cabin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://props/foliage/tree/Tree.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/music/loop6_bassy.wav" type="AudioStream" id=6]
 
 [node name="CabinExteriorHub" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -16,6 +17,7 @@ tile_data = PoolIntArray( 0, 1, 262160, 1, 1, 262160, 2, 1, 262160, 3, 1, 262160
 color = Color( 0.219608, 0.239216, 0.317647, 1 )
 
 [node name="YSort" type="YSort" parent="."]
+editor/display_folded = true
 
 [node name="EnemyZombie" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 224.848, 159.637 )
@@ -436,5 +438,9 @@ position = Vector2( 229.389, 260.419 )
 [node name="Tree117" parent="YSort/YSort" instance=ExtResource( 4 )]
 position = Vector2( 211.514, 266.775 )
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 256.655, 278.831 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true

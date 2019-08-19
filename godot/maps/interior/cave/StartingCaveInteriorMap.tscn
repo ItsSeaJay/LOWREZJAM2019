@@ -55,6 +55,10 @@ autoplay = true
 [node name="PromptsLayer" type="CanvasLayer" parent="."]
 
 [node name="KeyboardMovementPrompt" parent="PromptsLayer" instance=ExtResource( 8 )]
+margin_left = 0.174828
+margin_top = 0.174828
+margin_right = 0.174828
+margin_bottom = 0.174828
 
 [node name="ContactPortal" parent="." instance=ExtResource( 9 )]
 position = Vector2( 197.289, 89.7153 )
